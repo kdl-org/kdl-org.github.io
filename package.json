@@ -1,0 +1,24 @@
+{
+  "name": "kdl.dev",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf dist && mkdir -p dist/styles",
+    "dev": "npm run clean && postcss src/styles/global.css > dist/styles/global.css && eleventy --serve",
+    "build": "npm run clean && NODE_ENV=production postcss src/styles/global.css > dist/styles/global.css && eleventy",
+    "format": "prettier --write src"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@11ty/eleventy": "^0.11.1",
+    "autoprefixer": "^10.1.0",
+    "postcss": "^8.2.1",
+    "postcss-cli": "^8.3.1",
+    "prettier": "^2.2.1",
+    "tailwindcss": "^2.0.2"
+  },
+  "dependencies": {}
+}
