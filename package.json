@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -rf dist && mkdir -p dist/styles",
-    "dev": "npm run clean && postcss src/styles/global.css > dist/styles/global.css && eleventy --serve",
-    "build": "npm run clean && NODE_ENV=production postcss src/styles/global.css > dist/styles/global.css && eleventy",
+    "clean": "rm -rf docs && mkdir -p docs/styles",
+    "dev": "npm run clean && postcss src/styles/global.css > docs/styles/global.css && eleventy --serve",
+    "build": "npm run clean && NODE_ENV=production postcss src/styles/global.css > docs/styles/global.css && eleventy",
     "format": "prettier --write src"
   },
   "keywords": [],
