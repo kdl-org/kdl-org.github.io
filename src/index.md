@@ -7,8 +7,7 @@ title: kdl - Kat's Document Language
   <h1 class="text-4xl text-center">kdl - Kat's Document Language</h1>
 </header>
 
-
-{% include partials/description.html %}
-{% include partials/design-and-discussion.html %}
-{% include partials/design-principles.html %}
-{% include partials/overview.html %}
+{% include partials/description.md %}
+{% include partials/design-and-discussion.md %}
+{% include partials/design-principles.md %}
+{% include partials/overview.md %}

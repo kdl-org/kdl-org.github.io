@@ -1,10 +1,10 @@
 <section class="kdl-section" id="overview">
-  <h2>Overview</h2>
 
-  <p>The basic syntax is similar to SDLang:</p>
+## Overview
 
-  <pre>
-    <code>
+The basic syntax is similar to SDLang:
+
+```kdl
 // This is a node with a single string value
 title "Hello, World"
 
@@ -35,13 +35,11 @@ C style multiline
 */
 
 tag /*foo=true*/ bar=false
-    </code>
-  </pre>
+```
 
-  <p>But kdl changes a few details:</p>
+But kdl changes a few details:
 
-  <pre>
-    <code>
+```kdl
 // Files must be utf8 encoded!
 smile "😁"
 
@@ -94,20 +92,18 @@ mynode /-"commented" "not commented" /-key="value" /-{
   a
   b
 }
-    </code>
-  </pre>
+```
 
-  <p>The following SDLang features are removed altogether:</p>
+The following SDLang features are removed altogether:
 
-  <ul>
-    <li>"Anonymous" nodes</li>
-    <li>Binary data literals</li>
-    <li>Date/time formats</li>
-    <li><code>on</code> and <code>off</code> booleans</li>
-    <li>Backtick strings</li>
-    <li>Semicolons</li>
-    <li>Namespaces with <code>:</code></li>
-    <li>Shell style (<code>#</code>) and Lua style (<code>--</code>) comments</li>
-    <li>Distinction between 32/64/128-bit numbers. There's just numbers.</li>
-  </ul>
+- "Anonymous" nodes
+- Binary data literals
+- Date/time formats
+- `on` and `off` booleans
+- Backtick strings
+- Semicolons
+- Namespaces with `:`
+- Shell style (`#`) and Lua style (`--`) comments
+- Distinction between 32/64/128-bit numbers. There's just numbers.
+
 </section>
