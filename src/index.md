@@ -10,4 +10,5 @@ title: KDL - KDL Document Language
 {% include partials/description.md %}
 {% include partials/design-and-discussion.md %}
 {% include partials/design-principles.md %}
+{% include partials/implementations.md %}
 {% include partials/overview.md %}
