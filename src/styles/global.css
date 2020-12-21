@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .kdl-section {
-  @apply py-10 px-2 md:px-4 prose prose-xl mx-auto;
+  @apply py-10 px-4 prose prose-xl mx-auto;
 }
