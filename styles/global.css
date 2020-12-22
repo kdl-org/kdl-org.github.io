@@ -795,7 +795,7 @@ video {
 }
 
 .kdl-section pre code::after {
-  content: "";
+  content: none;
 }
 
 .kdl-section table {
