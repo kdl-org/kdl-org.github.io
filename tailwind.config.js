@@ -5,6 +5,17 @@ module.exports = {
   presets: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    extend: {
+      typography: {
+        DEFAULT: {
+          css: {
+            "pre code::after": {
+              content: "none",
+            },
+          },
+        },
+      },
+    },
     screens: {
       sm: "640px",
       md: "768px",
