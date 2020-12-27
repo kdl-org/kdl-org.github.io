@@ -4,6 +4,7 @@
 
 * Rust: [kdl-rs](https://github.com/kdl-org/kdl-rs)
 * JavaScript: [kdljs](https://github.com/kdl-org/kdljs)
+* Ruby: [kdl-rb](https://github.com/jellymann/kdl-rb)
 
 ## Editor Support
 
