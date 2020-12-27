@@ -4,6 +4,7 @@ const {
   MessageChannel,
 } = require("worker_threads");
 
+// See https://giuseppegurgone.com/synchronizing-async-functions/
 function wait_highlight(...args) {
   const worker = new Worker("./highlight_worker.js");
   const signal = new Int32Array(new SharedArrayBuffer(4));
