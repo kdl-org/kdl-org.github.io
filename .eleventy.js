@@ -12,7 +12,7 @@ function wait_highlight(...args) {
   try {
     const subChannel = new MessageChannel();
     worker.postMessage({ signal, port: subChannel.port1, args }, [
-        subChannel.port1
+      subChannel.port1,
     ]);
     Atomics.wait(signal, 0, 0);
     return receiveMessageOnPort(subChannel.port2).message.result;
