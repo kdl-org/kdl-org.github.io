@@ -2,6 +2,10 @@
 
 ## FAQ
 
+#### How do you pronounce "KDL"?
+
+Same as "cuddle".
+
 #### Why yet another document language?
 
 Because nothing out there felt quite right. The closest one I found was
