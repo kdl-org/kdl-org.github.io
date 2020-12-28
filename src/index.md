@@ -1,10 +1,10 @@
 ---
 layout: base.html
-title: KDL - KDL Document Language
+title: The KDL Document Language
 ---
 
 <header class="py-10 bg-gray-300">
-  <h1 class="text-4xl text-center">KDL - KDL Document Language</h1>
+  <h1 class="text-4xl text-center">The KDL Document Language</h1>
 </header>
 
 {% include partials/description.md %}
