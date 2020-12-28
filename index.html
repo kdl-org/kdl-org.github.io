@@ -24,22 +24,6 @@ language, and is relatively light on syntax compared to XML.</p>
 <a href="https://sdlang.org">SDLang</a>, with a number of modifications and
 clarifications on its syntax and behavior.</p>
 </section>
-<section class="kdl-section" id="design-and-discussion">
-<h2>Design and Discussion</h2>
-<p>KDL is still extremely new, and discussion about the format should happen over
-on the <a href="https://github.com/kdl-org/kdl/discussions">discussions</a> page in the
-Github repo. Feel free to jump in and give us your 2 cents!</p>
-</section>
-<section class="kdl-section" id="design-principles">
-<h2>Design Principles</h2>
-<ol>
-<li>Maintainability</li>
-<li>Flexibility</li>
-<li>Cognitive simplicity and Learnability</li>
-<li>Ease of de/serialization</li>
-<li>Ease of implementation</li>
-</ol>
-</section>
 <section class="kdl-section" id="implementations">
 <h2>Implementations</h2>
 <ul>
@@ -155,6 +139,92 @@ comment out individual nodes, arguments, or children:</p>
 <span class="line"><span style="color: #616E88">// kdl specifically allows properties and values to be</span></span>
 <span class="line"><span style="color: #616E88">// interspersed with each other, much like CLI commands.</span></span>
 <span class="line"><span style="color: #81A1C1">foo</span><span style="color: #D8DEE9FF"> </span><span style="color: #8FBCBB">bar</span><span style="color: #ECEFF4">=</span><span style="color: #81A1C1">true</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;baz&quot;</span><span style="color: #D8DEE9FF"> </span><span style="color: #8FBCBB">quux</span><span style="color: #ECEFF4">=</span><span style="color: #81A1C1">false</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">1</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">2</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">3</span></span></code></pre>
+</section>
+<section class="kdl-section" id="design-and-discussion">
+<h2>Design and Discussion</h2>
+<p>KDL is still extremely new, and discussion about the format should happen over
+on the <a href="https://github.com/kdl-org/kdl/discussions">discussions</a> page in the
+Github repo. Feel free to jump in and give us your 2 cents!</p>
+</section>
+<section class="kdl-section" id="design-principles">
+<h2>Design Principles</h2>
+<ol>
+<li>Maintainability</li>
+<li>Flexibility</li>
+<li>Cognitive simplicity and Learnability</li>
+<li>Ease of de/serialization</li>
+<li>Ease of implementation</li>
+</ol>
+</section>
+<section class="kdl-section" id="faq">
+<h2>FAQ</h2>
+<h4>Why yet another document language?</h4>
+<p>Because nothing out there felt quite right. The closest one I found was
+SDLang, but that had some design choices I disagreed with.</p>
+<h4>Ok, then, why not SDLang?</h4>
+<p>SDLang is designed for use cases that are not interesting to me, but are very
+relevant to the D-lang community. KDL is very similar in many ways, but is
+different in the following ways:</p>
+<ul>
+<li>The grammar and expected semantics are <a href="https://github.com/kdl-org/kdl/blob/main/SPEC.md">well-defined and specified</a>.</li>
+<li>There is only one &quot;number&quot; type. KDL does not prescribe representations.</li>
+<li>Slashdash (<code>/-</code>) comments are great and useful!</li>
+<li>I am not interested in having first-class date types, and SDLang's are very
+non-standard.</li>
+<li>Values and properties can be interspersed with each other, rather than one
+having to follow the other.</li>
+<li>KDL does not have a first-class binary data type. Just use strings with base64.</li>
+<li>All strings in KDL are multi-line, and raw strings are written with
+Rust-style syntax (<code>r&quot;foo&quot;</code>), instead of backticks.</li>
+<li>KDL identifiers can use UTF-8 and are much more lax about symbols than SDLang.</li>
+<li>KDL does not support &quot;anonymous&quot; nodes.</li>
+<li>Instead, KDL supports arbitrary identifiers for node names and attribute
+names, meaning you can use arbitrary strings for those: <code>&quot;123&quot; &quot;value&quot;=1</code> is
+a valid node, for example. This makes it easier to use KDL for
+representing arbitrary key/value pairs.</li>
+</ul>
+<h4>Have you seen that one XKCD comic about standards?</h4>
+<p>Yes. I have. Please stop linking me to it.</p>
+<h4>What about YAML?</h4>
+<p>YAML is a great, widespread language. Unlike KDL, which is node-based (like
+XML or HTML), it's based on map and array data structures, which can provide
+an easier serialization experience in some cases.</p>
+<p>At the same time, YAML can be ambiguous about what types the data written into
+it is. There's also a persistent issue where very large YAML files become
+unmanageable, especially due to the significant indentation feature.</p>
+<p>KDL is designed to avoid these particular pitfalls by always being explicit
+about types, and having clearly-delimited scope (and the ability to
+auto-indent/auto-format). Syntax errors are easier to catch, and large files
+are (hopefully!) much more manageable.</p>
+<h4>What about JSON?</h4>
+<p>JSON is a great serialization language, but it can be very difficult to use as
+a human configuration language. This is largely due to its very specific, very
+strict syntax, as well as its lack of support for comments.</p>
+<p>KDL, on the other hand, has great comment support, and has a much more
+forgiving syntax without being so flexible as to allow certain classes of
+unfortunate mistakes. It also has much more flexibility around how to
+represent data.</p>
+<h4>What about TOML?</h4>
+<p>It nests very poorly. It doesn't fare well with large files.</p>
+<h4>What about XML?</h4>
+<p>XML is actually pretty fantastic, and has long been a standard for data
+exchange across many industries. At the same time, XML is known to be very
+verbose, and editing it involves writing (and updating) matching tags. Another
+large pitfall with XML is its lack of direct support for arbitrary string
+key/value pairs, so what would be a simple <code>foo: x</code> in some languages has to
+be represented as <code>&lt;entry name=&quot;foo&quot; value=&quot;x&quot; /&gt;</code> or something similar. XML
+also functions great as a <strong>markup</strong> language. That is, it is easy to
+intersperse with text, like HTML.</p>
+<p>KDL, just like XML, is a node/element-based language, but with much more
+lightweight syntax. It also adds the ability to apply anonymous values
+directly to a node, rather than as children. That is, <code>nodename 1 2 3</code> instead
+of <code>&lt;element&gt;&lt;child&gt;1&lt;/child&gt;&lt;child&gt;2&lt;/child&gt;(etc)&lt;/element&gt;</code>. This can make
+it much more manageable and readable as a human configuration language, and is
+also less verbose when exchanging documents across APIs!</p>
+<p>Finally, KDL is <strong>not</strong> a markup language. XML or HTML do a much better job of
+&quot;marking up&quot; a text document with special tags, although KDL can still be
+useful for templating engines that want to be more strict about text
+fragments.</p>
 </section>
 </main>
   </body>
