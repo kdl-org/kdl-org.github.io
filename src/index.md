@@ -8,8 +8,8 @@ title: KDL - KDL Document Language
 </header>
 
 {% include partials/description.md %}
-{% include partials/implementations.md %}
 {% include partials/overview.md %}
+{% include partials/implementations.md %}
 {% include partials/design-and-discussion.md %}
 {% include partials/design-principles.md %}
 {% include partials/faq.md %}
