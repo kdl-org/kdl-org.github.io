@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf docs && mkdir -p docs/styles",
-    "dev": "npm run clean && postcss src/styles/global.css > docs/styles/global.css && eleventy --serve",
-    "build": "npm run clean && NODE_ENV=production postcss src/styles/global.css > docs/styles/global.css && eleventy",
+    "static": "cp -r static docs",
+    "build": "npm run clean && npm run static && postcss src/styles/global.css > docs/styles/global.css",
+    "dev": "npm run build && eleventy --serve",
+    "prod": "NODE_ENV=production npm run build && eleventy",
     "format": "prettier --write src ./*.js ./.*.js"
   },
   "keywords": [],
