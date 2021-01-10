@@ -765,11 +765,11 @@ video {
 }
 
 .kdl-section code::before {
-  content: "`";
+  content: none;
 }
 
 .kdl-section code::after {
-  content: "`";
+  content: none;
 }
 
 .kdl-section a code {
@@ -1214,6 +1214,12 @@ video {
   padding-right: 1rem;
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
+}
+
+code {
+  background-color: #efefef;
+  padding: 0.1em 0.5em;
+  border-radius: 4px;
 }
 
 @media (min-width: 640px) {
