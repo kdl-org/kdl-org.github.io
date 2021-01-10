@@ -9,6 +9,12 @@ module.exports = {
       typography: {
         DEFAULT: {
           css: {
+            "code::before": {
+              content: "none",
+            },
+            "code::after": {
+              content: "none",
+            },
             "pre code::after": {
               content: "none",
             },

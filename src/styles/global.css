@@ -5,3 +5,9 @@
 .kdl-section {
   @apply py-10 px-4 prose prose-xl mx-auto;
 }
+
+code {
+  background-color: #efefef;
+  padding: 0.1em 0.5em;
+  border-radius: 4px;
+}
