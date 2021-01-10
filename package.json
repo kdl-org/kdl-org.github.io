@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf docs && mkdir -p docs/styles",
-    "static": "cp -r static docs",
+    "static": "cp -r static/* docs",
     "build": "npm run clean && npm run static && postcss src/styles/global.css > docs/styles/global.css",
     "dev": "npm run build && eleventy --serve",
     "prod": "NODE_ENV=production npm run build && eleventy",
