@@ -7,6 +7,7 @@
 * Ruby: [kdl-rb](https://github.com/jellymann/kdl-rb)
 * Dart: [kdl-dart](https://github.com/jellymann/kdl-dart)
 * Java: [kdl4j](https://github.com/hkolbeck/kdl4j)
+* PHP: [kdl-php](https://github.com/kdl-org/kdl-php)
 
 ## Editor Support
 
