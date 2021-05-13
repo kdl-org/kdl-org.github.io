@@ -6,6 +6,10 @@
 
 Same as "cuddle".
 
+#### What is the expected file extension?
+
+A file containing KDL should end with `.kdl`.
+
 #### Why yet another document language?
 
 Because nothing out there felt quite right. The closest one I found was
