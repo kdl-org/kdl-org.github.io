@@ -175,12 +175,21 @@ Github repo. Feel free to jump in and give us your 2 cents!</p>
 <li>Ease of implementation</li>
 </ol>
 </section>
+<section class="kdl-section" id="compatibility-with-json-and-xml">
+<h2>Compatibility with JSON and XML</h2>
+<p>There are two specifications for writing KDL that can be losslessly translated
+between it and JSON or XML. These specifications define a stricter <em>subset</em> of
+KDL that, even if not entirely idiomatic, is still valid and fits into the
+data models of the other two languages:</p>
+<ul>
+<li><a href="https://github.com/kdl-org/kdl/blob/main/JSON-IN-KDL.md">JSON in KDL</a></li>
+<li><a href="https://github.com/kdl-org/kdl/blob/main/XML-IN-KDL.md">XML in KDL</a></li>
+</ul>
+</section>
 <section class="kdl-section" id="faq">
 <h2>FAQ</h2>
-<h4>How do you pronounce &quot;KDL&quot;?</h4>
+<h4>How do you pronounce KDL?</h4>
 <p>Same as &quot;cuddle&quot;.</p>
-<h4>What is the expected file extension?</h4>
-<p>A file containing KDL should end with <code>.kdl</code>.</p>
 <h4>Why yet another document language?</h4>
 <p>Because nothing out there felt quite right. The closest one I found was
 SDLang, but that had some design choices I disagreed with.</p>
@@ -227,6 +236,9 @@ strict syntax, as well as its lack of support for comments.</p>
 forgiving syntax without being so flexible as to allow certain classes of
 unfortunate mistakes. It also has much more flexibility around how to
 represent data.</p>
+<p>If you need to interoperate with a service that consumes or emits JSON, or for
+some other reason have need to write &quot;JSON in KDL&quot;, <a href="https://github.com/kdl-org/kdl/blob/main/JSON-IN-KDL.md">we have JiK, an official
+microsyntax for losslessly encoding JSON</a>.</p>
 <h4>What about TOML?</h4>
 <p>It nests very poorly. It doesn't fare well with large files.</p>
 <h4>What about XML?</h4>
@@ -248,6 +260,9 @@ also less verbose when exchanging documents across APIs!</p>
 &quot;marking up&quot; a text document with special tags, although KDL can still be
 useful for templating engines that want to be more strict about text
 fragments.</p>
+<p>If you need to interoperate with a service that consumes or emits XML, or for
+some other reason have need to write &quot;XML in KDL&quot;, <a href="https://github.com/kdl-org/kdl/blob/main/XML-IN-KDL.md">we have XiK, an official
+microsyntax for losslessly encoding XML</a>.</p>
 </section>
 </main>
   </body>
