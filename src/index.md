@@ -13,4 +13,5 @@ title: The KDL Document Language
 {% include partials/implementations.md %}
 {% include partials/design-and-discussion.md %}
 {% include partials/design-principles.md %}
+{% include partials/compatibility-with-json-and-xml %}
 {% include partials/faq.md %}

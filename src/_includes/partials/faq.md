@@ -2,13 +2,9 @@
 
 ## FAQ
 
-#### How do you pronounce "KDL"?
+#### How do you pronounce KDL?
 
 Same as "cuddle".
-
-#### What is the expected file extension?
-
-A file containing KDL should end with `.kdl`.
 
 #### Why yet another document language?
 
@@ -68,6 +64,10 @@ forgiving syntax without being so flexible as to allow certain classes of
 unfortunate mistakes. It also has much more flexibility around how to
 represent data.
 
+If you need to interoperate with a service that consumes or emits JSON, or for
+some other reason have need to write "JSON in KDL", [we have JiK, an official
+microsyntax for losslessly encoding JSON](https://github.com/kdl-org/kdl/blob/main/JSON-IN-KDL.md).
+
 #### What about TOML?
 
 It nests very poorly. It doesn't fare well with large files.
@@ -94,5 +94,10 @@ Finally, KDL is **not** a markup language. XML or HTML do a much better job of
 "marking up" a text document with special tags, although KDL can still be
 useful for templating engines that want to be more strict about text
 fragments.
+
+If you need to interoperate with a service that consumes or emits XML, or for
+some other reason have need to write "XML in KDL", [we have XiK, an official
+microsyntax for losslessly encoding XML](https://github.com/kdl-org/kdl/blob/main/XML-IN-KDL.md).
+
 
 </section>
