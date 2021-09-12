@@ -137,6 +137,20 @@ mynode /-"commented" "not commented" /-key="value" /-{
 }
 ```
 
+### Type Annotations
+
+KDL supports type annotations on both values and nodes. These can be
+arbitrary, but can be used by individual implementations or use-cases to
+constrain KDL's basic types. A number of type names are also reserved to have
+specific meanings.
+
+```kdl
+numbers (u8)10 (i32)20 myfloat=(f32)1.5 {
+  strings (uuid)"123e4567-e89b-12d3-a456-426614174000" (date)"2021-02-03" filter=(regex)r"$\d+"
+  (author)person name="Alex"
+}
+```
+
 ### More Details
 
 ```kdl
@@ -156,7 +170,7 @@ smile "😁"
 foo123~!@#$%^&*.:'|/?+ "weeee"
 
 // And you can also use unicode!
-ノード　お名前＝"☜(ﾟヮﾟ☜)"
+ノード　お名前="☜(ﾟヮﾟ☜)"
 
 // kdl specifically allows properties and values to be
 // interspersed with each other, much like CLI commands.

@@ -18,4 +18,6 @@ based on JSON Schema.
 The language is based on [SDLang](https://sdlang.org), with a number of
 modifications and clarifications on its syntax and behavior.
 
+The current version of the KDL spec is `1.0.0`.
+
 </section>
