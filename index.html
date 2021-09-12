@@ -38,6 +38,7 @@ Language</a> loosely
 based on JSON Schema.</p>
 <p>The language is based on <a href="https://sdlang.org">SDLang</a>, with a number of
 modifications and clarifications on its syntax and behavior.</p>
+<p>The current version of the KDL spec is <code>1.0.0</code>.</p>
 </section>
 <section class="kdl-section" id="overview">
 <h2>Overview</h2>
@@ -120,6 +121,15 @@ comment out individual nodes, arguments, or children:</p>
 <span class="line"><span style="color: #616E88">  a</span></span>
 <span class="line"><span style="color: #616E88">  b</span></span>
 <span class="line"><span style="color: #616E88">}</span></span></code></pre>
+<h3>Type Annotations</h3>
+<p>KDL supports type annotations on both values and nodes. These can be
+arbitrary, but can be used by individual implementations or use-cases to
+constrain KDL's basic types. A number of type names are also reserved to have
+specific meanings.</p>
+<pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #81A1C1">numbers</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">(u8)10</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">(i32)20</span><span style="color: #D8DEE9FF"> </span><span style="color: #8FBCBB">myfloat</span><span style="color: #ECEFF4">=</span><span style="color: #81A1C1">(f32)1.5</span><span style="color: #D8DEE9FF"> {</span></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">strings</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">(uuid)</span><span style="color: #A3BE8C">&quot;123e4567-e89b-12d3-a456-426614174000&quot;</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">(date)</span><span style="color: #A3BE8C">&quot;2021-02-03&quot;</span><span style="color: #D8DEE9FF"> </span><span style="color: #8FBCBB">filter</span><span style="color: #ECEFF4">=</span><span style="color: #81A1C1">(regex)r</span><span style="color: #A3BE8C">&quot;$\d+&quot;</span></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">(author)person</span><span style="color: #D8DEE9FF"> </span><span style="color: #8FBCBB">name</span><span style="color: #ECEFF4">=</span><span style="color: #A3BE8C">&quot;Alex&quot;</span></span>
+<span class="line"><span style="color: #D8DEE9FF">}</span></span></code></pre>
 <h3>More Details</h3>
 <pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #616E88">// Nodes can be separated into multiple lines</span></span>
 <span class="line"><span style="color: #81A1C1">title</span><span style="color: #D8DEE9FF"> \</span></span>
@@ -137,7 +147,7 @@ comment out individual nodes, arguments, or children:</p>
 <span class="line"><span style="color: #81A1C1">foo123~!@#$%^&amp;*.</span><span style="color: #D8DEE9FF">:&#39;</span><span style="color: #81A1C1">|/</span><span style="color: #D8DEE9FF">?</span><span style="color: #81A1C1">+</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;weeee&quot;</span></span>
 
 <span class="line"><span style="color: #616E88">// And you can also use unicode!</span></span>
-<span class="line"><span style="color: #81A1C1">ノード</span><span style="color: #D8DEE9FF">　</span><span style="color: #81A1C1">お名前</span><span style="color: #D8DEE9FF">＝</span><span style="color: #A3BE8C">&quot;☜(ﾟヮﾟ☜)&quot;</span></span>
+<span class="line"><span style="color: #81A1C1">ノード</span><span style="color: #D8DEE9FF">　</span><span style="color: #8FBCBB">お名前</span><span style="color: #ECEFF4">=</span><span style="color: #A3BE8C">&quot;☜(ﾟヮﾟ☜)&quot;</span></span>
 
 <span class="line"><span style="color: #616E88">// kdl specifically allows properties and values to be</span></span>
 <span class="line"><span style="color: #616E88">// interspersed with each other, much like CLI commands.</span></span>
