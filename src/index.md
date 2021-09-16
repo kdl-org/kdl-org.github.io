@@ -4,7 +4,7 @@ title: The KDL Document Language
 ---
 
 <header class="pt-20 pb-10 px-4">
-  <img src="./logo-with-tagline.svg" class="mx-auto h-20" alt="KDL: A cuddly document language">
+  <img src="./logo-with-tagline.svg" class="mx-auto h-40" alt="KDL: A cuddly document language">
 </header>
 
 {% include partials/description.md %}
