@@ -519,8 +519,8 @@ video {
   display: contents;
 }
 
-.h-20 {
-  height: 5rem;
+.h-40 {
+  height: 10rem;
 }
 
 .mx-auto {
