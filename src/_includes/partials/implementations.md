@@ -11,6 +11,7 @@
 * Python: [kdl-py](https://github.com/daeken/kdl-py)
 * Elixir: [kuddle](https://github.com/IceDragon200/kuddle)
 * XSLT: [xml2kdl](https://github.com/Devasta/XML2KDL)
+* Haskell: [Hustle](https://github.com/fuzzypixelz/Hustle)
 
 ## Editor Support
 
