@@ -2,7 +2,7 @@
 
 ## Implementations
 
-* Rust: [kdl-rs](https://github.com/kdl-org/kdl-rs) and [knuffel](https://crates.io/crates/knuffel/) (latter includes derive macro)
+* Rust: [kdl-rs](https://github.com/kdl-org/kdl-rs), [knuffel](https://crates.io/crates/knuffel/) (latter includes derive macro), and [kaydle](https://github.com/Lucretiel/kaydle) (serde-based)
 * JavaScript: [kdljs](https://github.com/kdl-org/kdljs)
 * Ruby: [kdl-rb](https://github.com/danini-the-panini/kdl-rb)
 * Dart: [kdl-dart](https://github.com/danini-the-panini/kdl-dart)
