@@ -12,6 +12,7 @@
 * Elixir: [kuddle](https://github.com/IceDragon200/kuddle)
 * XSLT: [xml2kdl](https://github.com/Devasta/XML2KDL)
 * Haskell: [Hustle](https://github.com/fuzzypixelz/Hustle)
+* .NET: [Kadlet](https://github.com/oledfish/Kadlet)
 
 ## Editor Support
 
