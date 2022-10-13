@@ -16,7 +16,8 @@
 * C: [ckdl](https://github.com/tjol/ckdl)
 * C++: [kdlpp](https://github.com/tjol/ckdl) (part of ckdl, requires C++20)
 * OCaml: [ocaml-kdl](https://github.com/Bannerets/ocaml-kdl)
-
+* Nim: [kdl-nim](https://github.com/Patitotective/kdl-nim)
+  
 ## Editor Support
 
 * [VS Code](https://marketplace.visualstudio.com/items?itemName=kdl-org.kdl&ssr=false#review-details)
