@@ -21,5 +21,6 @@
 ## Editor Support
 
 * [VS Code](https://marketplace.visualstudio.com/items?itemName=kdl-org.kdl&ssr=false#review-details)
+* [Intellij IDEA](https://plugins.jetbrains.com/plugin/20136-kdl-document-language)
 
 </section>
