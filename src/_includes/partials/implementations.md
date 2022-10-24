@@ -22,5 +22,5 @@
 
 * [VS Code](https://marketplace.visualstudio.com/items?itemName=kdl-org.kdl&ssr=false#review-details)
 * [Intellij IDEA](https://plugins.jetbrains.com/plugin/20136-kdl-document-language)
-
+* [vim](https://github.com/imsnif/kdl.vim)
 </section>
