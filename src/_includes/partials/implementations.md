@@ -8,7 +8,7 @@
 * Dart: [kdl-dart](https://github.com/danini-the-panini/kdl-dart)
 * Java: [kdl4j](https://github.com/hkolbeck/kdl4j)
 * PHP: [kdl-php](https://github.com/kdl-org/kdl-php)
-* Python: [kdl-py](https://github.com/daeken/kdl-py), [cuddle](https://github.com/djmattyg007/python-cuddle), [ckdl](https://github.com/tjol/ckdl)
+* Python: [kdl-py](https://github.com/tabatkins/kdlpy), [cuddle](https://github.com/djmattyg007/python-cuddle), [ckdl](https://github.com/tjol/ckdl)
 * Elixir: [kuddle](https://github.com/IceDragon200/kuddle)
 * XSLT: [xml2kdl](https://github.com/Devasta/XML2KDL)
 * Haskell: [Hustle](https://github.com/fuzzypixelz/Hustle)
