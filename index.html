@@ -23,10 +23,40 @@
   <img src="./logo-with-tagline.svg" class="mx-auto h-40" alt="KDL: A cuddly document language">
 </header>
 <section class="kdl-section" id="description">
-<p>KDL is a document language with xml-like semantics that looks like you're
-invoking a bunch of CLI commands! It's meant to be used both as a
+<p>KDL is a small, pleasing document language with xml-like semantics that looks
+like you're invoking a bunch of CLI commands! It's meant to be used both as a
 serialization format and a configuration language, much like JSON, YAML, or
-XML.</p>
+XML. It looks like this:</p>
+<pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #81A1C1">package</span><span style="color: #D8DEE9FF"> {</span></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">name</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;my-pkg&quot;</span></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">version</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;1.2.3&quot;</span></span>
+
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">dependencies</span><span style="color: #D8DEE9FF"> {</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #616E88">// Nodes can have standalone values as well as key/value pairs.</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #81A1C1">lodash</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;^3.2.1&quot;</span><span style="color: #D8DEE9FF"> </span><span style="color: #8FBCBB">optional</span><span style="color: #ECEFF4">=</span><span style="color: #81A1C1">true</span><span style="color: #D8DEE9FF"> </span><span style="color: #8FBCBB">alias</span><span style="color: #ECEFF4">=</span><span style="color: #A3BE8C">&quot;underscore&quot;</span></span>
+<span class="line"><span style="color: #D8DEE9FF">  }</span></span>
+
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">scripts</span><span style="color: #D8DEE9FF"> {</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #616E88">// &quot;Raw&quot; and multi-line strings are supported.</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #81A1C1">build</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">r#&quot;</span></span>
+<span class="line"><span style="color: #A3BE8C">      echo &quot;foo&quot;</span></span>
+<span class="line"><span style="color: #A3BE8C">      node -c &quot;console.log(&#39;hello, world!&#39;);&quot;</span></span>
+<span class="line"><span style="color: #A3BE8C">      echo &quot;foo&quot; &gt; some-file.txt</span></span>
+<span class="line"><span style="color: #A3BE8C">    &quot;#</span></span>
+<span class="line"><span style="color: #D8DEE9FF">  }</span></span>
+
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #616E88">// `\` breaks up a single node across multiple lines.</span></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">the-matrix</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">1</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">2</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">3</span><span style="color: #D8DEE9FF"> \</span></span>
+<span class="line"><span style="color: #D8DEE9FF">             </span><span style="color: #B48EAD">4</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">5</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">6</span><span style="color: #D8DEE9FF"> \</span></span>
+<span class="line"><span style="color: #D8DEE9FF">             </span><span style="color: #B48EAD">7</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">8</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">9</span></span>
+
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #616E88">// &quot;Slashdash&quot; comments operate at the node level, with just `/-`.</span></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #616E88">/-this-is-commented </span><span style="color: #D8DEE9FF">{</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #81A1C1">this</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;entire&quot;</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;node&quot;</span><span style="color: #D8DEE9FF"> {</span></span>
+<span class="line"><span style="color: #D8DEE9FF">      </span><span style="color: #A3BE8C">&quot;is&quot;</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;gone&quot;</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    }</span></span>
+<span class="line"><span style="color: #D8DEE9FF">  }</span></span>
+<span class="line"><span style="color: #D8DEE9FF">}</span></span></code></pre>
 <p>There's a living <a href="https://github.com/kdl-org/kdl/blob/main/SPEC.md">specification</a>, as well as various
 <a href="#implementations">implementations</a>. You can also check out the <a href="#faq">FAQ</a> to
 answer all your burning questions!</p>
