@@ -21,6 +21,7 @@
 * Go: [gokdl](https://github.com/lunjon/gokdl), [kdl-go](https://github.com/sblinch/kdl-go)
 * Swift: [kdl-swift](https://github.com/danini-the-panini/kdl-swift)
 * Crystal: [kdl-cr](https://github.com/danini-the-panini/kdl-cr)
+* Lua: [kdlua](https://github.com/danini-the-panini/kdlua)
   
 ## Editor Support
 
