@@ -1,13 +1,19 @@
 {
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "comment": "Some of these patterns are taken straight from rust-analyzer: https://github.com/rust-lang/vscode-rust/blob/master/rust-analyzer/editors/code/rust.tmGrammar.json. Some was also taken from https://github.com/arm32x/vscode-sdlang/blob/master/syntaxes/sdlang.tmLanguage.json",
-  "name": "KDL",
+  "name": "kdl",
   "patterns": [
+    {
+      "include": "#forbidden_ident"
+    },
     {
       "include": "#null"
     },
     {
       "include": "#boolean"
+    },
+    {
+      "include": "#float_keyword"
     },
     {
       "include": "#float_fraction"
@@ -28,10 +34,13 @@
       "include": "#binary"
     },
     {
-      "include": "#raw-strings"
+      "include": "#raw-string"
     },
     {
-      "include": "#strings"
+      "include": "#string_multi_line"
+    },
+    {
+      "include": "#string_single_line"
     },
     {
       "include": "#block_comment"
@@ -46,6 +55,9 @@
       "include": "#slashdash_comment"
     },
     {
+      "include": "#slashdash_node_with_children_comment"
+    },
+    {
       "include": "#slashdash_node_comment"
     },
     {
@@ -56,6 +68,9 @@
     },
     {
       "include": "#node_name"
+    },
+    {
+      "include": "#ident_string"
     }
   ],
   "repository": {
@@ -77,54 +92,77 @@
     "hexadecimal": {
       "comment": "Integer literal (hexadecimal)",
       "name": "constant.numeric.integer.hexadecimal.rust",
-      "match": "\\b0x[a-fA-F0-9_]+\\b"
+      "match": "\\b0x[a-fA-F0-9][a-fA-F0-9_]*\\b"
     },
     "octal": {
       "comment": "Integer literal (octal)",
       "name": "constant.numeric.integer.octal.rust",
-      "match": "\\b0o[0-7_]+\\b"
+      "match": "\\b0o[0-7][0-7_]*\\b"
     },
     "binary": {
       "comment": "Integer literal (binary)",
       "name": "constant.numeric.integer.binary.rust",
-      "match": "\\b0b[01_]+\\b"
+      "match": "\\b0b[01][01_]*\\b"
+    },
+    "forbidden_ident": {
+      "name": "invalid.illegal.kdl.bad-ident",
+      "match": "(?<!#)(?:true|false|null|nan|[-]?inf)"
     },
     "node_name": {
       "name": "entity.name.tag",
-      "match": "(?![\\\\{\\}<>;\\[\\]\\=,])[\\w\\-_~!@#\\$%^&*+|/.\\(\\)]+"
+      "match": "((?<={|;)|^)\\s*(?![/\\\\{\\}#;\\[\\]\\=])[<>:\\w\\-_~,'`!\\?@\\$%^&*+|.\\(\\)]+\\d*[<>:\\w\\-_~,'`!\\?@\\$%^&*+|.\\(\\)]*"
     },
     "attribute": {
       "name": "entity.other.attribute-name.kdl",
-      "match": "(?![\\\\{\\}<>;\\[\\]\\=,])[\\w\\-_~!@#\\$%^&*+|/.]+(=)",
+      "match": "(?![/\\\\{\\}#;\\[\\]\\=])[<>:\\w\\-_~,'`!\\?@\\$%^&*+|.\\(\\)]+\\d*[<>:\\w\\-_~,'`!\\?@\\$%^&*+|.\\(\\)]*(=)",
       "captures": {
         "1": {
           "name": "punctuation.separator.key-value.kdl"
         }
       }
     },
+    "ident_string": {
+      "name": "string.unquoted",
+      "match": "(?![/\\\\{\\}#;\\[\\]\\=])[<>:\\w\\-_~,'`!\\?@\\$%^&*+|.\\(\\)]+\\d*[<>:\\w\\-_~,'`!\\?@\\$%^&*+|.\\(\\)]*"
+    },
+    "float_keyword": {
+      "name": "constant.language.other.kdl",
+      "match": "#nan|#inf|#-inf"
+    },
     "null": {
       "name": "constant.language.null.kdl",
-      "match": "\\bnull\\b"
+      "match": "#null"
     },
     "boolean": {
       "name": "constant.language.boolean.kdl",
-      "match": "\\b(true|false)\\b"
+      "match": "#true|#false"
     },
-    "strings": {
+    "string_single_line": {
       "name": "string.quoted.double.kdl",
       "begin": "\"",
       "end": "\"",
       "patterns": [
         {
           "name": "constant.character.escape.kdl",
-          "match": "\\\\(:?[nrtbf\\\\\"]|u\\{[a-fA-F0-9]{1,6}\\})"
+          "match": "\\\\(:?[nrtbfs\\\\\"]|u\\{[a-fA-F0-9]{1,6}\\})"
         }
       ]
     },
-    "raw-strings": {
-      "name": "string.quoted.double.raw.kdl",
-      "begin": "b?r(#*)\"",
-      "end": "\"\\1"
+    "string_multi_line": {
+      "name": "string.quoted.triple.kdl",
+      "begin": "\"\"\"",
+      "end": "\"\"\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.kdl",
+          "match": "\\\\(:?[nrtbfs\\\\\"]|u\\{[a-fA-F0-9]{1,6}\\})"
+        }
+      ]
+    },
+    "raw-string": {
+      "name": "string.quoted.other.raw.kdl",
+      "begin": "(#+)(\"{3,1})",
+      "end": "\\2\\1"
     },
     "block_doc_comment": {
       "comment": "Block documentation comment",
@@ -156,26 +194,32 @@
     },
     "line_comment": {
       "comment": "Single-line comment",
-      "name": "comment.line.double-slash.rust",
+      "name": "comment.line.double-slash.kdl",
       "begin": "//",
       "end": "$"
     },
     "slashdash_comment": {
-      "name": "comment.line.double-slash",
+      "name": "comment.block.slashdash.kdl",
       "comment": "Slashdash inline comment",
       "begin": "(?<!^)/-",
       "end": "\\s"
     },
     "slashdash_node_comment": {
-      "name": "comment.block",
+      "name": "comment.block.slashdash.kdl",
       "comment": "Slashdash node comment",
       "begin": "(?<=^)/-",
-      "end": "}"
+      "end": "(?:;|(?<!\\\\)$)"
+    },
+    "slashdash_node_with_children_comment": {
+      "name": "comment.block.slashdash.kdl",
+      "comment": "Slashdash node comment",
+      "begin": "(?<=^)/-[^{]+{",
+      "end": "\\}"
     },
     "slashdash_block_comment": {
-      "name": "comment.block",
+      "name": "comment.block.slashdash.kdl",
       "comment": "Slashdash block comment",
-      "begin": "/-{",
+      "begin": "/-(?:\\s*){",
       "end": "}"
     }
   },

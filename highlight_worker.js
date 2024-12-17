@@ -13,7 +13,10 @@ async function shiki_highlight(code, lang) {
       },
     ],
   });
-  return highlighter.codeToHtml(code, lang);
+  console.log("highlighting...");
+  const ret = highlighter.codeToHtml(code, lang);
+  console.log("highlighted!");
+  return ret;
 }
 
 parentPort.addListener("message", async ({ signal, port, args }) => {
@@ -21,8 +24,11 @@ parentPort.addListener("message", async ({ signal, port, args }) => {
   const result = await shiki_highlight(...args);
 
   // Post the result to the main thread before unlocking "signal"
+  console.log("posting result...");
   port.postMessage({ result });
+  console.log("posted result");
   port.close();
+  console.log("port closed");
 
   // Change the value of signal[0] to 1
   Atomics.store(signal, 0, 1);

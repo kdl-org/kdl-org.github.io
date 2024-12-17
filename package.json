@@ -7,8 +7,8 @@
     "clean": "rm -rf docs && mkdir -p docs/styles",
     "static": "cp -r static/* docs",
     "build": "npm run clean && npm run static && postcss src/styles/global.css > docs/styles/global.css",
-    "dev": "npm run build && eleventy --serve",
-    "prod": "NODE_ENV=production npm run build && eleventy",
+    "dev": "npm run build && eleventy --config=.eleventy.mjs --serve",
+    "prod": "NODE_ENV=production npm run build && eleventy --config=.eleventy.mjs",
     "format": "prettier --write src ./*.js ./.*.js"
   },
   "keywords": [],
@@ -21,7 +21,7 @@
     "postcss": "^8.2.1",
     "postcss-cli": "^8.3.1",
     "prettier": "^2.2.1",
-    "shiki": "^0.2.7",
+    "shiki": "^1.24.2",
     "tailwindcss": "^2.0.2"
   }
 }

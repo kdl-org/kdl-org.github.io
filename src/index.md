@@ -55,14 +55,15 @@ package {
 
 For more details, see the [overview below](#overview).
 
-There's a living [specification](SPEC.md), as well as various
-[implementations](#implementations). You can also check out the [FAQ](#faq) to
-answer all your burning questions!
+There's a living
+[specification](https://github.com/kdl-org/kdl/blob/main/SPEC.md), as well as
+various [implementations](#implementations). You can also check out the
+[FAQ](#faq) to answer all your burning questions!
 
 The current version of the KDL spec is `2.0.0`. For legacy KDL, please refer to
-the [KDL 1.0 spec](./SPEC_v1.md). All users are encouraged to migrate.
-[Migration is forward-and-backward-compatible and
-safe](./SPEC.md#compatibility), and can be automated.
+the [KDL 1.0 spec](https://github.com/kdl-org/kdl/blob/main/SPEC_v1.md). All
+users are encouraged to migrate. [Migration is forward-and-backward-compatible
+and safe](./SPEC.md#compatibility), and can be automated.
 
 In addition to a spec for KDL itself, there are specifications for [a KDL Query
 Language](QUERY-SPEC.md) based on CSS selectors, and [a KDL Schema
@@ -397,8 +398,8 @@ between it and JSON or XML. These specifications define a stricter _subset_ of
 KDL that, even if not entirely idiomatic, is still valid and fits into the
 data models of the other two languages:
 
-* [JSON in KDL](JSON-IN-KDL.md)
-* [XML in KDL](XML-IN-KDL.md)
+* [JSON in KDL](https://github.com/kdl-org/kdl/blob/main/JSON-IN-KDL.md)
+* [XML in KDL](https://github.com/kdl-org/kdl/blob/main/JSON-IN-KDL.md)
 
 </section>
 
@@ -485,7 +486,8 @@ represent data.
 
 If you need to interoperate with a service that consumes or emits JSON, or for
 some other reason have need to write "JSON in KDL", [we have JiK, an official
-microsyntax for losslessly encoding JSON](JSON-IN-KDL.md).
+microsyntax for losslessly encoding
+JSON](https://github.com/kdl-org/kdl/blob/main/JSON-IN-KDL.md).
 
 #### What about TOML?
 
@@ -516,6 +518,6 @@ fragments.
 
 If you need to interoperate with a service that consumes or emits XML, or for
 some other reason have need to write "XML in KDL", [we have XiK, an official
-microsyntax for losslessly encoding XML](XML-IN-KDL.md).
+microsyntax for losslessly encoding XML](https://github.com/kdl-org/kdl/blob/main/XML-IN-KDL.md).
 
 </section>
