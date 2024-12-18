@@ -55,10 +55,10 @@
       "include": "#slashdash_comment"
     },
     {
-      "include": "#slashdash_node_with_children_comment"
+      "include": "#slashdash_node_comment"
     },
     {
-      "include": "#slashdash_node_comment"
+      "include": "#slashdash_node_with_children_comment"
     },
     {
       "include": "#line_comment"
@@ -201,26 +201,26 @@
     "slashdash_comment": {
       "name": "comment.block.slashdash.kdl",
       "comment": "Slashdash inline comment",
-      "begin": "(?<!^)/-",
+      "begin": "(?<!^\\s*)/-",
       "end": "\\s"
     },
     "slashdash_node_comment": {
       "name": "comment.block.slashdash.kdl",
       "comment": "Slashdash node comment",
-      "begin": "(?<=^)/-",
+      "begin": "(?<=^\\s*)/-[^{]+$",
       "end": "(?:;|(?<!\\\\)$)"
     },
     "slashdash_node_with_children_comment": {
       "name": "comment.block.slashdash.kdl",
       "comment": "Slashdash node comment",
-      "begin": "(?<=^)/-[^{]+{",
+      "begin": "(?<=^\\s*)/-[^{]+{",
       "end": "\\}"
     },
     "slashdash_block_comment": {
       "name": "comment.block.slashdash.kdl",
       "comment": "Slashdash block comment",
-      "begin": "/-(?:\\s*){",
-      "end": "}"
+      "begin": "/-\\s*{",
+      "end": "\\}"
     }
   },
   "scopeName": "source.kdl"
