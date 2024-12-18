@@ -63,11 +63,11 @@ various [implementations](#implementations). You can also check out the
 The current version of the KDL spec is `2.0.0`. For legacy KDL, please refer to
 the [KDL 1.0 spec](https://github.com/kdl-org/kdl/blob/main/SPEC_v1.md). All
 users are encouraged to migrate. [Migration is forward-and-backward-compatible
-and safe](./SPEC.md#compatibility), and can be automated.
+and safe](https://github.com/kdl-org/kdl/blob/main/SPEC.md#compatibility), and can be automated.
 
 In addition to a spec for KDL itself, there are specifications for [a KDL Query
-Language](QUERY-SPEC.md) based on CSS selectors, and [a KDL Schema
-Language](SCHEMA-SPEC.md) loosely based on JSON Schema.
+Language](https://github.com/kdl-org/kdl/blob/main/QUERY-SPEC.md) based on CSS selectors, and [a KDL Schema
+Language](https://github.com/kdl-org/kdl/blob/main/SCHEMA-SPEC.md) loosely based on JSON Schema.
 
 The language is based on [SDLang](https://sdlang.org), with a [number of
 modifications and clarifications on its syntax and behavior](#why-not-sdlang).
