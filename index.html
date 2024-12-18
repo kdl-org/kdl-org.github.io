@@ -23,212 +23,466 @@
   <img src="./logo-with-tagline.svg" class="mx-auto h-40" alt="KDL: A cuddly document language">
 </header>
 <section class="kdl-section" id="description">
-<p>KDL is a small, pleasing document language with xml-like semantics that looks
-like you're invoking a bunch of CLI commands! It's meant to be used both as a
-serialization format and a configuration language, much like JSON, YAML, or
+<p>KDL is a small, pleasant document language with XML-like node semantics that
+looks like you're invoking a bunch of CLI commands! It's meant to be used both
+as a serialization format and a configuration language, much like JSON, YAML, or
 XML. It looks like this:</p>
-<pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #81A1C1">package</span><span style="color: #D8DEE9FF"> {</span></span>
-<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">name</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;my-pkg&quot;</span></span>
-<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">version</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;1.2.3&quot;</span></span>
-
-<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">dependencies</span><span style="color: #D8DEE9FF"> {</span></span>
-<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #616E88">// Nodes can have standalone values as well as</span></span>
-<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #616E88">// key/value pairs.</span></span>
-<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #81A1C1">lodash</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;^3.2.1&quot;</span><span style="color: #D8DEE9FF"> </span><span style="color: #8FBCBB">optional</span><span style="color: #ECEFF4">=</span><span style="color: #81A1C1">true</span><span style="color: #D8DEE9FF"> </span><span style="color: #8FBCBB">alias</span><span style="color: #ECEFF4">=</span><span style="color: #A3BE8C">&quot;underscore&quot;</span></span>
-<span class="line"><span style="color: #D8DEE9FF">  }</span></span>
-
-<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">scripts</span><span style="color: #D8DEE9FF"> {</span></span>
-<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #616E88">// &quot;Raw&quot; and multi-line strings are supported.</span></span>
-<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #81A1C1">build</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">r#&quot;</span></span>
-<span class="line"><span style="color: #A3BE8C">      echo &quot;foo&quot;</span></span>
-<span class="line"><span style="color: #A3BE8C">      node -c &quot;console.log(&#39;hello, world!&#39;);&quot;</span></span>
-<span class="line"><span style="color: #A3BE8C">      echo &quot;foo&quot; &gt; some-file.txt</span></span>
-<span class="line"><span style="color: #A3BE8C">    &quot;#</span></span>
-<span class="line"><span style="color: #D8DEE9FF">  }</span></span>
-
-<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #616E88">// `\` breaks up a single node across multiple lines.</span></span>
-<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">the-matrix</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">1</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">2</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">3</span><span style="color: #D8DEE9FF"> \</span></span>
-<span class="line"><span style="color: #D8DEE9FF">             </span><span style="color: #B48EAD">4</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">5</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">6</span><span style="color: #D8DEE9FF"> \</span></span>
-<span class="line"><span style="color: #D8DEE9FF">             </span><span style="color: #B48EAD">7</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">8</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">9</span></span>
-
-<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #616E88">// &quot;Slashdash&quot; comments operate at the node level,</span></span>
-<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #616E88">// with just `/-`.</span></span>
-<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #616E88">/-this-is-commented </span><span style="color: #D8DEE9FF">{</span></span>
-<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #81A1C1">this</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;entire&quot;</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;node&quot;</span><span style="color: #D8DEE9FF"> {</span></span>
-<span class="line"><span style="color: #D8DEE9FF">      </span><span style="color: #A3BE8C">&quot;is&quot;</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;gone&quot;</span></span>
-<span class="line"><span style="color: #D8DEE9FF">    }</span></span>
-<span class="line"><span style="color: #D8DEE9FF">  }</span></span>
-<span class="line"><span style="color: #D8DEE9FF">}</span></span></code></pre>
-<p>There's a living <a href="https://github.com/kdl-org/kdl/blob/main/SPEC.md">specification</a>, as well as various
-<a href="#implementations">implementations</a>. You can also check out the <a href="#faq">FAQ</a> to
-answer all your burning questions!</p>
-<p>In addition to a spec for KDL itself, there are also standard specs for <a href="https://github.com/kdl-org/kdl/blob/main/QUERY-SPEC.md">a KDL
-Query Language</a> based
-on CSS selectors, and <a href="https://github.com/kdl-org/kdl/blob/main/SCHEMA-SPEC.md">a KDL Schema
-Language</a> loosely
-based on JSON Schema.</p>
-<p>The language is based on <a href="https://sdlang.org">SDLang</a>, with a number of
-modifications and clarifications on its syntax and behavior.</p>
-<p>The current version of the KDL spec is <code>1.0.0</code>.</p>
-<p><a href="https://kdl-play.danini.dev/">Play with it in your browser!</a></p>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">package</span><span style="color:#D8DEE9FF"> {</span></span>
+<span class="line"><span style="color:#81A1C1">  name</span><span style="color:#A3BE8C"> my-pkg</span></span>
+<span class="line"><span style="color:#81A1C1">  version</span><span style="color:#A3BE8C"> "1.2.3"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#81A1C1">  dependencies</span><span style="color:#D8DEE9FF"> {</span></span>
+<span class="line"><span style="color:#616E88">    // Nodes can have standalone values as well as</span></span>
+<span class="line"><span style="color:#616E88">    // key/value pairs.</span></span>
+<span class="line"><span style="color:#81A1C1">    lodash</span><span style="color:#A3BE8C"> "^3.2.1"</span><span style="color:#8FBCBB"> optional</span><span style="color:#ECEFF4">=</span><span style="color:#81A1C1">#true</span><span style="color:#8FBCBB"> alias</span><span style="color:#ECEFF4">=</span><span style="color:#A3BE8C">underscore</span></span>
+<span class="line"><span style="color:#D8DEE9FF">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#81A1C1">  scripts</span><span style="color:#D8DEE9FF"> {</span></span>
+<span class="line"><span style="color:#616E88">    // "Raw" and dedented multi-line strings are supported.</span></span>
+<span class="line"><span style="color:#81A1C1">    message</span><span style="color:#A3BE8C"> """</span></span>
+<span class="line"><span style="color:#A3BE8C">      hello</span></span>
+<span class="line"><span style="color:#A3BE8C">      world</span></span>
+<span class="line"><span style="color:#A3BE8C">      """</span></span>
+<span class="line"><span style="color:#81A1C1">    build</span><span style="color:#A3BE8C"> #"""</span></span>
+<span class="line"><span style="color:#A3BE8C">      echo "foo"</span></span>
+<span class="line"><span style="color:#A3BE8C">      node -c "console.log('hello, world!');"</span></span>
+<span class="line"><span style="color:#A3BE8C">      echo "foo" > some-file.txt</span></span>
+<span class="line"><span style="color:#A3BE8C">      """#</span></span>
+<span class="line"><span style="color:#D8DEE9FF">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#616E88">  // `\` breaks up a single node across multiple lines.</span></span>
+<span class="line"><span style="color:#81A1C1">  the-matrix</span><span style="color:#B48EAD"> 1</span><span style="color:#B48EAD"> 2</span><span style="color:#B48EAD"> 3</span><span style="color:#D8DEE9FF"> \</span></span>
+<span class="line"><span style="color:#81A1C1">             4</span><span style="color:#B48EAD"> 5</span><span style="color:#B48EAD"> 6</span><span style="color:#D8DEE9FF"> \</span></span>
+<span class="line"><span style="color:#81A1C1">             7</span><span style="color:#B48EAD"> 8</span><span style="color:#B48EAD"> 9</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#616E88">  // "Slashdash" comments operate at the node level,</span></span>
+<span class="line"><span style="color:#616E88">  // with just `/-`.</span></span>
+<span class="line"><span style="color:#616E88">  /-this-is-commented </span><span style="color:#D8DEE9FF">{</span></span>
+<span class="line"><span style="color:#81A1C1">    this</span><span style="color:#A3BE8C"> entire</span><span style="color:#A3BE8C"> node</span><span style="color:#D8DEE9FF"> {</span></span>
+<span class="line"><span style="color:#81A1C1">      is</span><span style="color:#A3BE8C"> gone</span></span>
+<span class="line"><span style="color:#D8DEE9FF">    }</span></span>
+<span class="line"><span style="color:#D8DEE9FF">  }</span></span>
+<span class="line"><span style="color:#D8DEE9FF">}</span></span>
+<span class="line"></span></code></pre>
+<p>For more details, see the <a href="#overview">overview below</a>.</p>
+<p>There's a living
+<a href="https://github.com/kdl-org/kdl/blob/main/SPEC.md">specification</a>, as well as
+various <a href="#implementations">implementations</a>. You can also check out the
+<a href="#faq">FAQ</a> to answer all your burning questions!</p>
+<p>The current version of the KDL spec is <code>2.0.0</code>. For legacy KDL, please refer to
+the <a href="https://github.com/kdl-org/kdl/blob/main/SPEC_v1.md">KDL 1.0 spec</a>. All
+users are encouraged to migrate. <a href="./SPEC.md#compatibility">Migration is forward-and-backward-compatible
+and safe</a>, and can be automated.</p>
+<p>In addition to a spec for KDL itself, there are specifications for <a href="QUERY-SPEC.md">a KDL Query
+Language</a> based on CSS selectors, and <a href="SCHEMA-SPEC.md">a KDL Schema
+Language</a> loosely based on JSON Schema.</p>
+<p>The language is based on <a href="https://sdlang.org">SDLang</a>, with a <a href="#why-not-sdlang">number of
+modifications and clarifications on its syntax and behavior</a>.
+We are grateful for their work as an inspiration to ours.</p>
+<p><a href="https://kdl-play.danini.dev/">Play with it in your browser (currently v1 only)!</a></p>
+</section>
+<section class="kdl-section" id="design-and-discussion">
+<h2>Design and Discussion</h2>
+<p>KDL 2.0.0 has been finalized, and no further changes are expected. For questions
+about KDL and discussions, please see the <a href="https://github.com/kdl-org/kdl/discussions">discussions
+page</a>. For minor editorial fixes or
+critical spec errata, please feel free to <a href="https://github.com/kdl-org/kdl/issues">file an
+issue</a>.</p>
+</section>
+<section class="kdl-section" id="used-by">
+<h2>Used By</h2>
+<p>A lot of folks have started picking up KDL for both personal projects, and
+larger open source, and even proprietary projects! This section includes a list
+of some examples of KDL in the wild (either v1, v2, or both):</p>
+<ul>
+<li><a href="https://zellij.dev">Zellij</a> - Terminal workspace/multiplexer</li>
+<li><a href="https://github.com/YaLTeR/niri">Niri</a> - Scrollable-tiling window manager for Wayland</li>
+<li><a href="https://github.com/speced/bikeshed">Bikeshed</a> (<a href="https://github.com/speced/bikeshed-boilerplate/blob/main/boilerplate/doctypes.kdl">here</a> and <a href="https://github.com/speced/bikeshed-data/blob/main/data/manifest.txt">here</a>) - Specification pre-processor used by CSS, C++, WHATWG, various W3C working groups, and others.</li>
+<li><a href="https://orogene.dev">orogene</a> - Lightning-fast JavaScript package manager</li>
+<li><a href="https://github.com/pop-os/system76-scheduler">Pop!_OS/System76 Scheduler</a> - Scheduling service which optimizes Linux's CPU scheduler and makes it go faster.</li>
+<li><a href="https://patitotective.github.io/ImStyle/">ImStyle</a> - ImGui application styling with Nim and KDL</li>
+<li><a href="https://github.com/CAD97/fmod-rs">fmod-rs</a> - Rust bindings to FMOD Core and FMOD Studio</li>
+<li><a href="https://mise.jdx.dev/">mise</a> - dev tools, env vars, task runner</li>
+<li><a href="https://github.com/camping/camping">Camping</a> - Ruby web microframework</li>
+<li>You?</li>
+</ul>
+</section>
+<section class="kdl-section" id="implementations">
+<h2>Implementations</h2>
+<blockquote>
+<p>[!INFO] There are two major versions of KDL. Different libraries may support one or the
+other, or even provide a &quot;hybrid&quot; mode where both versions are attempted, since
+there's no data ambiguity between v1 and v2 documents.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Language</th>
+<th>Implementation</th>
+<th>v1</th>
+<th>v2</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C</td>
+<td><a href="https://github.com/tjol/ckdl">ckdl</a></td>
+<td>✅</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>C#/.NET</td>
+<td><a href="https://github.com/oledfish/Kadlet">Kadlet</a></td>
+<td>✅</td>
+<td>✖️</td>
+<td></td>
+</tr>
+<tr>
+<td>C++</td>
+<td><a href="https://github.com/tjol/ckdl">kdlpp</a></td>
+<td>✅</td>
+<td>✅</td>
+<td>part of ckdl, requires C++20</td>
+</tr>
+<tr>
+<td>Common Lisp</td>
+<td><a href="https://github.com/chee/kdlcl">kdlcl</a></td>
+<td>✅</td>
+<td>✖️</td>
+<td></td>
+</tr>
+<tr>
+<td>Crystal</td>
+<td><a href="https://github.com/danini-the-panini/kdl-cr">kdl-cr</a></td>
+<td>✅</td>
+<td>✖️</td>
+<td></td>
+</tr>
+<tr>
+<td>Dart</td>
+<td><a href="https://github.com/danini-the-panini/kdl-dart">kdl-dart</a></td>
+<td>✅</td>
+<td>✖️</td>
+<td></td>
+</tr>
+<tr>
+<td>Elixir</td>
+<td><a href="https://github.com/IceDragon200/kuddle">kuddle</a></td>
+<td>✅</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>Go</td>
+<td><a href="https://github.com/lunjon/gokdl">gokdl</a></td>
+<td>✅</td>
+<td>✖️</td>
+<td></td>
+</tr>
+<tr>
+<td>Go</td>
+<td><a href="https://github.com/sblinch/kdl-go">kdl-go</a></td>
+<td>✅</td>
+<td>✖️</td>
+<td></td>
+</tr>
+<tr>
+<td>Haskell</td>
+<td><a href="https://github.com/fuzzypixelz/Hustle">Hustle</a></td>
+<td>✅</td>
+<td>✖️</td>
+<td></td>
+</tr>
+<tr>
+<td>Java</td>
+<td><a href="https://github.com/hkolbeck/kdl4j">kdl4j</a></td>
+<td>✅</td>
+<td>✖️</td>
+<td></td>
+</tr>
+<tr>
+<td>JavaScript</td>
+<td><a href="https://github.com/bgotink/kdl">@bgotink/kdl</a></td>
+<td>✅*</td>
+<td>✅</td>
+<td>Format/comment-preserving parser</td>
+</tr>
+<tr>
+<td>JavaScript</td>
+<td><a href="https://github.com/virtualstate/kdl">@virtualstate/kdl</a></td>
+<td>✅</td>
+<td>✖️</td>
+<td>query only, JSX based</td>
+</tr>
+<tr>
+<td>JavaScript</td>
+<td><a href="https://github.com/kdl-org/kdljs">kdljs</a></td>
+<td>✅</td>
+<td>✖️</td>
+<td></td>
+</tr>
+<tr>
+<td>Lua</td>
+<td><a href="https://github.com/danini-the-panini/kdlua">kdlua</a></td>
+<td>✅</td>
+<td>✖️</td>
+<td></td>
+</tr>
+<tr>
+<td>Nim</td>
+<td><a href="https://github.com/Patitotective/kdl-nim">kdl-nim</a></td>
+<td>✅</td>
+<td>✖️</td>
+<td></td>
+</tr>
+<tr>
+<td>OCaml</td>
+<td><a href="https://github.com/Bannerets/ocaml-kdl">ocaml-kdl</a></td>
+<td>✅</td>
+<td>✖️</td>
+<td></td>
+</tr>
+<tr>
+<td>PHP</td>
+<td><a href="https://github.com/kdl-org/kdl-php">kdl-php</a></td>
+<td>✅</td>
+<td>✖️</td>
+<td></td>
+</tr>
+<tr>
+<td>Python</td>
+<td><a href="https://github.com/tjol/ckdl">ckdl</a></td>
+<td>✅</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>Python</td>
+<td><a href="https://github.com/djmattyg007/python-cuddle">cuddle</a></td>
+<td>✅</td>
+<td>✖️</td>
+<td></td>
+</tr>
+<tr>
+<td>Python</td>
+<td><a href="https://github.com/tabatkins/kdlpy">kdl-py</a></td>
+<td>✅</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>Ruby</td>
+<td><a href="https://github.com/danini-the-panini/kdl-rb">kdl-rb</a></td>
+<td>✅</td>
+<td>✖️</td>
+<td></td>
+</tr>
+<tr>
+<td>Rust</td>
+<td><a href="https://github.com/kdl-org/kdl-rs">kdl-rs</a></td>
+<td>✅*</td>
+<td>✅</td>
+<td>Format/comment-preserving parser</td>
+</tr>
+<tr>
+<td>Rust</td>
+<td><a href="https://crates.io/crates/knuffel/">knuffel</a></td>
+<td>✅</td>
+<td>✖️</td>
+<td>Serde-<em>style</em> derive macros (not actual Serde)</td>
+</tr>
+<tr>
+<td>Swift</td>
+<td><a href="https://github.com/danini-the-panini/kdl-swift">kdl-swift</a></td>
+<td>✅</td>
+<td>✖️</td>
+<td></td>
+</tr>
+<tr>
+<td>XSLT</td>
+<td><a href="https://github.com/Devasta/XML2KDL">xml2kdl</a></td>
+<td>✅</td>
+<td>✖️</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>* Supported by earlier library version</p>
+</section>
+<section class="kdl-section" id="editor-support">
+<h2>Editor Support</h2>
+<ul>
+<li><a href="https://plugins.jetbrains.com/plugin/20136-kdl-document-language">Intellij IDEA</a></li>
+<li><a href="https://packagecontrol.io/packages/KDL">Sublime Text</a></li>
+<li><a href="https://github.com/tree-sitter-grammars/tree-sitter-kdl">TreeSitter</a> (neovim, among others)</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=kdl-org.kdl&amp;ssr=false#review-details">VS Code</a></li>
+<li><a href="https://github.com/imsnif/kdl.vim">vim</a></li>
+</ul>
 </section>
 <section class="kdl-section" id="overview">
 <h2>Overview</h2>
 <h3>Basics</h3>
-<p>A KDL node is a node name, followed by zero or more &quot;arguments&quot;, and
+<p>A KDL node is a node name string, followed by zero or more &quot;arguments&quot;, and
 children.</p>
-<pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #81A1C1">title</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;Hello, World&quot;</span></span></code></pre>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">title</span><span style="color:#A3BE8C"> "Hello, World"</span></span>
+<span class="line"></span></code></pre>
 <p>You can also have multiple values in a single node!</p>
-<pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #81A1C1">bookmarks</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">12</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">15</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">188</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">1234</span></span></code></pre>
-<p>Nodes can have properties.</p>
-<pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #81A1C1">author</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;Alex Monad&quot;</span><span style="color: #D8DEE9FF"> </span><span style="color: #8FBCBB">email</span><span style="color: #ECEFF4">=</span><span style="color: #A3BE8C">&quot;alex@example.com&quot;</span><span style="color: #D8DEE9FF"> </span><span style="color: #8FBCBB">active</span><span style="color: #ECEFF4">=</span><span style="color: #81A1C1">true</span></span></code></pre>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">bookmarks</span><span style="color:#B48EAD"> 12</span><span style="color:#B48EAD"> 15</span><span style="color:#B48EAD"> 188</span><span style="color:#B48EAD"> 1234</span></span>
+<span class="line"></span></code></pre>
+<p>Nodes can have properties, with string keys.</p>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">author</span><span style="color:#A3BE8C"> "Alex Monad"</span><span style="color:#8FBCBB"> email</span><span style="color:#ECEFF4">=</span><span style="color:#A3BE8C">alex@example.com</span><span style="color:#8FBCBB"> active</span><span style="color:#ECEFF4">=</span><span style="color:#81A1C1">#true</span></span>
+<span class="line"></span></code></pre>
 <p>And they can have nested child nodes, too!</p>
-<pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #81A1C1">contents</span><span style="color: #D8DEE9FF"> {</span></span>
-<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">section</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;First section&quot;</span><span style="color: #D8DEE9FF"> {</span></span>
-<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #81A1C1">paragraph</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;This is the first paragraph&quot;</span></span>
-<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #81A1C1">paragraph</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;This is the second paragraph&quot;</span></span>
-<span class="line"><span style="color: #D8DEE9FF">  }</span></span>
-<span class="line"><span style="color: #D8DEE9FF">}</span></span></code></pre>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">contents</span><span style="color:#D8DEE9FF"> {</span></span>
+<span class="line"><span style="color:#81A1C1">  section</span><span style="color:#A3BE8C"> "First section"</span><span style="color:#D8DEE9FF"> {</span></span>
+<span class="line"><span style="color:#81A1C1">    paragraph</span><span style="color:#A3BE8C"> "This is the first paragraph"</span></span>
+<span class="line"><span style="color:#81A1C1">    paragraph</span><span style="color:#A3BE8C"> "This is the second paragraph"</span></span>
+<span class="line"><span style="color:#D8DEE9FF">  }</span></span>
+<span class="line"><span style="color:#D8DEE9FF">}</span></span>
+<span class="line"></span></code></pre>
 <p>Nodes without children are terminated by a newline, a semicolon, or the end of
 a file stream:</p>
-<pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #81A1C1">node1</span><span style="color: #D8DEE9FF">; </span><span style="color: #81A1C1">node2</span><span style="color: #D8DEE9FF">; </span><span style="color: #81A1C1">node3</span><span style="color: #D8DEE9FF">;</span></span></code></pre>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">node1</span><span style="color:#D8DEE9FF">;</span><span style="color:#81A1C1"> node2</span><span style="color:#D8DEE9FF">;</span><span style="color:#81A1C1"> node3</span><span style="color:#D8DEE9FF">;</span></span>
+<span class="line"></span></code></pre>
 <h3>Values</h3>
 <p>KDL supports 4 data types:</p>
 <ul>
-<li>Strings: <code>&quot;hello world&quot;</code></li>
+<li>Strings: <code>unquoted</code>, <code>&quot;hello world&quot;</code>, or <code>#&quot;hello world&quot;#</code></li>
 <li>Numbers: <code>123.45</code></li>
-<li>Booleans: <code>true</code> and <code>false</code></li>
-<li>Null: <code>null</code></li>
+<li>Booleans: <code>#true</code> and <code>#false</code></li>
+<li>Null: <code>#null</code></li>
 </ul>
 <h4>Strings</h4>
-<p>It supports two different formats for string input: escaped and raw.</p>
-<pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #81A1C1">node</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;this</span><span style="color: #EBCB8B">\n</span><span style="color: #A3BE8C">has</span><span style="color: #EBCB8B">\t</span><span style="color: #A3BE8C">escapes&quot;</span></span>
-<span class="line"><span style="color: #81A1C1">other</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">r&quot;C:\Users\zkat\&quot;</span></span></code></pre>
-<p>Both types of string can be multiline as-is, without a different syntax:</p>
-<pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #81A1C1">string</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;my</span></span>
-<span class="line"><span style="color: #A3BE8C">multiline</span></span>
-<span class="line"><span style="color: #A3BE8C">value&quot;</span></span></code></pre>
-<p>And for raw strings, you can add any number of # after the r and the last &quot; to
-disambiguate literal &quot; characters:</p>
-<pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #81A1C1">other-raw</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">r#&quot;hello&quot;world&quot;#</span></span></code></pre>
+<p>It supports three different formats for string input: identifiers, quoted, and raw.</p>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">node1</span><span style="color:#A3BE8C"> this-is-a-string</span></span>
+<span class="line"><span style="color:#81A1C1">node2</span><span style="color:#A3BE8C"> "this</span><span style="color:#EBCB8B">\n</span><span style="color:#A3BE8C">has</span><span style="color:#EBCB8B">\t</span><span style="color:#A3BE8C">escapes"</span></span>
+<span class="line"><span style="color:#81A1C1">node3</span><span style="color:#A3BE8C"> #"C:\Users\zkat\raw\string"#</span></span>
+<span class="line"></span></code></pre>
+<p>You don't have to quote strings unless any the following apply:</p>
+<ul>
+<li>The string contains whitespace.</li>
+<li>The string contains any of <code>[]{}()\/#&quot;;=</code>.</li>
+<li>The string is one of <code>true</code>, <code>false</code>, <code>null</code>, <code>inf</code>, <code>-inf</code>, or <code>nan</code>.</li>
+<li>The strings starts with a digit, or <code>+</code>/<code>-</code>/<code>.</code>/<code>-.</code>,<code>+.</code> and a digit.
+(aka &quot;looks like a number&quot;)</li>
+</ul>
+<p>In essence, if it can get confused for other KDL or KQL syntax, it needs
+quotes.</p>
+<p>Both types of quoted string can be written across multiple lines by using triple
+quotes (<code>&quot;&quot;&quot;</code>) followed immediately by a newline. Additionally, common
+indentation shared with the line containing the closing quotes will be
+stripped/dedented:</p>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">string</span><span style="color:#A3BE8C"> """</span></span>
+<span class="line"><span style="color:#A3BE8C">  my</span></span>
+<span class="line"><span style="color:#A3BE8C">    multiline</span></span>
+<span class="line"><span style="color:#A3BE8C">  value</span></span>
+<span class="line"><span style="color:#A3BE8C">  """</span></span>
+<span class="line"></span></code></pre>
+<p>Raw strings, which do not support <code>\</code> escapes and can be used when you want
+certain kinds of strings to look nicer without having to escape a lot:</p>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">exec</span><span style="color:#A3BE8C"> #"""</span></span>
+<span class="line"><span style="color:#A3BE8C">  echo "foo"</span></span>
+<span class="line"><span style="color:#A3BE8C">  echo "bar"</span></span>
+<span class="line"><span style="color:#A3BE8C">  cd C:\path\to\dir</span></span>
+<span class="line"><span style="color:#A3BE8C">  """#</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#81A1C1">regex</span><span style="color:#A3BE8C"> #"\d{3} "[^/"]+""#</span></span>
+<span class="line"></span></code></pre>
+<p>You can add any number of <code>#</code>s before and after the opening and
+closing <code>#</code> to disambiguate literal closing <code>#&quot;</code> sequences:</p>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">other-raw</span><span style="color:#A3BE8C"> ##"hello#"world"##</span></span>
+<span class="line"></span></code></pre>
 <h4>Numbers</h4>
-<p>There's 4 ways to represent numbers in KDL. KDL does not prescribe any
+<p>There are 4 ways to represent numbers in KDL. KDL does not prescribe any
 representation for these numbers, and it's entirely up to individual
 implementations whether to represent all numbers with a single type, or to
 have different representations for different forms.</p>
 <p>KDL has regular decimal-radix numbers, with optional decimal part, as well as
 an optional exponent.</p>
-<pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #81A1C1">num</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">1.234e-42</span></span></code></pre>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">num</span><span style="color:#B48EAD"> 1.234e-42</span></span>
+<span class="line"></span></code></pre>
 <p>And using the appropriate prefix, you can also enter hexadecimal, octal, and
 binary literals:</p>
-<pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #81A1C1">my-hex</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">0xdeadbeef</span></span>
-<span class="line"><span style="color: #81A1C1">my-octal</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">0o755</span></span>
-<span class="line"><span style="color: #81A1C1">my-binary</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">0b10101101</span></span></code></pre>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">my-hex</span><span style="color:#B48EAD"> 0xdeadbeef</span></span>
+<span class="line"><span style="color:#81A1C1">my-octal</span><span style="color:#B48EAD"> 0o755</span></span>
+<span class="line"><span style="color:#81A1C1">my-binary</span><span style="color:#B48EAD"> 0b10101101</span></span>
+<span class="line"></span></code></pre>
 <p>Finally, all numbers can have underscores to help readability:</p>
-<pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #81A1C1">bignum</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">1_000_000</span></span></code></pre>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">bignum</span><span style="color:#B48EAD"> 1_000_000</span></span>
+<span class="line"></span></code></pre>
 <h3>Comments</h3>
 <p>KDL supports C-style comments, both line-based and multiline. Multiline
 comments can be nested.</p>
-<pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #616E88">// C style</span></span>
-
-<span class="line"><span style="color: #616E88">/*</span></span>
-<span class="line"><span style="color: #616E88">C style multiline</span></span>
-<span class="line"><span style="color: #616E88">*/</span></span>
-
-<span class="line"><span style="color: #81A1C1">tag</span><span style="color: #D8DEE9FF"> </span><span style="color: #616E88">/*foo=true*/</span><span style="color: #D8DEE9FF"> </span><span style="color: #8FBCBB">bar</span><span style="color: #ECEFF4">=</span><span style="color: #81A1C1">false</span></span>
-
-<span class="line"><span style="color: #616E88">/*/*</span></span>
-<span class="line"><span style="color: #616E88">hello</span></span>
-<span class="line"><span style="color: #616E88">*/*/</span></span></code></pre>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#616E88">// C style</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#616E88">/*</span></span>
+<span class="line"><span style="color:#616E88">C style multiline</span></span>
+<span class="line"><span style="color:#616E88">*/</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#81A1C1">tag</span><span style="color:#616E88"> /*foo=#true*/</span><span style="color:#8FBCBB"> bar</span><span style="color:#ECEFF4">=</span><span style="color:#81A1C1">#false</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#616E88">/*/*</span></span>
+<span class="line"><span style="color:#616E88">hello</span></span>
+<span class="line"><span style="color:#616E88">*/*/</span></span>
+<span class="line"></span></code></pre>
 <p>On top of that, KDL supports <code>/-</code> &quot;slashdash&quot; comments, which can be used to
-comment out individual nodes, arguments, or children:</p>
-<pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #616E88">// This entire node and its children are all commented out.</span></span>
-<span class="line"><span style="color: #616E88">/-mynode &quot;foo&quot; key=1 {</span></span>
-<span class="line"><span style="color: #616E88">  a</span></span>
-<span class="line"><span style="color: #616E88">  b</span></span>
-<span class="line"><span style="color: #616E88">  c</span></span>
-<span class="line"><span style="color: #616E88">}</span></span>
-
-<span class="line"><span style="color: #81A1C1">mynode</span><span style="color: #D8DEE9FF"> </span><span style="color: #616E88">/-&quot;commented&quot; </span><span style="color: #A3BE8C">&quot;not commented&quot;</span><span style="color: #D8DEE9FF"> </span><span style="color: #616E88">/-key=&quot;value&quot; /-{</span></span>
-<span class="line"><span style="color: #616E88">  a</span></span>
-<span class="line"><span style="color: #616E88">  b</span></span>
-<span class="line"><span style="color: #616E88">}</span></span></code></pre>
+comment out individual nodes, entries, or child blocks:</p>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#616E88">// This entire node and its children are all commented out.</span></span>
+<span class="line"><span style="color:#616E88">/-mynode foo key=1 {</span></span>
+<span class="line"><span style="color:#616E88">  a</span></span>
+<span class="line"><span style="color:#616E88">  b</span></span>
+<span class="line"><span style="color:#616E88">  c</span></span>
+<span class="line"><span style="color:#616E88">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#81A1C1">mynode</span><span style="color:#616E88"> /-commented </span><span style="color:#A3BE8C">"not commented"</span><span style="color:#616E88"> /-key=value /-{</span></span>
+<span class="line"><span style="color:#616E88">  a</span></span>
+<span class="line"><span style="color:#616E88">  b</span></span>
+<span class="line"><span style="color:#616E88">}</span></span>
+<span class="line"><span style="color:#616E88">// The above is equivalent to:</span></span>
+<span class="line"><span style="color:#81A1C1">mynode</span><span style="color:#A3BE8C"> "not commented"</span></span>
+<span class="line"></span></code></pre>
 <h3>Type Annotations</h3>
 <p>KDL supports type annotations on both values and nodes. These can be
 arbitrary, but can be used by individual implementations or use-cases to
 constrain KDL's basic types. A number of type names are also reserved to have
 specific meanings.</p>
-<pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #81A1C1">numbers</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">(u8)10</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">(i32)20</span><span style="color: #D8DEE9FF"> </span><span style="color: #8FBCBB">myfloat</span><span style="color: #ECEFF4">=</span><span style="color: #81A1C1">(f32)1.5</span><span style="color: #D8DEE9FF"> {</span></span>
-<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">strings</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">(uuid)</span><span style="color: #A3BE8C">&quot;123e4567-e89b-12d3-a456-426614174000&quot;</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">(date)</span><span style="color: #A3BE8C">&quot;2021-02-03&quot;</span><span style="color: #D8DEE9FF"> </span><span style="color: #8FBCBB">filter</span><span style="color: #ECEFF4">=</span><span style="color: #81A1C1">(regex)r</span><span style="color: #A3BE8C">&quot;$\d+&quot;</span></span>
-<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">(author)person</span><span style="color: #D8DEE9FF"> </span><span style="color: #8FBCBB">name</span><span style="color: #ECEFF4">=</span><span style="color: #A3BE8C">&quot;Alex&quot;</span></span>
-<span class="line"><span style="color: #D8DEE9FF">}</span></span></code></pre>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">numbers</span><span style="color:#A3BE8C"> (u8)10</span><span style="color:#A3BE8C"> (i32)20</span><span style="color:#8FBCBB"> myfloat</span><span style="color:#ECEFF4">=</span><span style="color:#A3BE8C">(f32)1.5</span><span style="color:#D8DEE9FF"> {</span></span>
+<span class="line"><span style="color:#81A1C1">  strings</span><span style="color:#A3BE8C"> (uuid)"123e4567-e89b-12d3-a456-426614174000"</span><span style="color:#A3BE8C"> (date)"2021-02-03"</span><span style="color:#8FBCBB"> filter</span><span style="color:#ECEFF4">=</span><span style="color:#A3BE8C">(regex)#"$\d+"#</span></span>
+<span class="line"><span style="color:#81A1C1">  (author)person</span><span style="color:#8FBCBB"> name</span><span style="color:#ECEFF4">=</span><span style="color:#A3BE8C">Alex</span></span>
+<span class="line"><span style="color:#D8DEE9FF">}</span></span>
+<span class="line"></span></code></pre>
 <h3>More Details</h3>
-<pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #616E88">// Nodes can be separated into multiple lines</span></span>
-<span class="line"><span style="color: #81A1C1">title</span><span style="color: #D8DEE9FF"> \</span></span>
-<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #A3BE8C">&quot;Some title&quot;</span></span>
-
-
-<span class="line"><span style="color: #616E88">// Files must be utf8 encoded!</span></span>
-<span class="line"><span style="color: #81A1C1">smile</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;😁&quot;</span></span>
-
-<span class="line"><span style="color: #616E88">// Instead of anonymous nodes, nodes and properties can be wrapped</span></span>
-<span class="line"><span style="color: #616E88">// in &quot;&quot; for arbitrary node names.</span></span>
-<span class="line"><span style="color: #A3BE8C">&quot;!@#$@$%Q#$%~@!40&quot;</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;1.2.3&quot;</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;!!!!!&quot;</span><span style="color: #D8DEE9FF">=</span><span style="color: #81A1C1">true</span></span>
-
-<span class="line"><span style="color: #616E88">// The following is a legal bare identifier:</span></span>
-<span class="line"><span style="color: #81A1C1">foo123~!@#$%^&amp;*.</span><span style="color: #D8DEE9FF">:&#39;</span><span style="color: #81A1C1">|</span><span style="color: #D8DEE9FF">?</span><span style="color: #81A1C1">+</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;weeee&quot;</span></span>
-
-<span class="line"><span style="color: #616E88">// And you can also use unicode!</span></span>
-<span class="line"><span style="color: #81A1C1">ノード</span><span style="color: #D8DEE9FF">　</span><span style="color: #8FBCBB">お名前</span><span style="color: #ECEFF4">=</span><span style="color: #A3BE8C">&quot;☜(ﾟヮﾟ☜)&quot;</span></span>
-
-<span class="line"><span style="color: #616E88">// kdl specifically allows properties and values to be</span></span>
-<span class="line"><span style="color: #616E88">// interspersed with each other, much like CLI commands.</span></span>
-<span class="line"><span style="color: #81A1C1">foo</span><span style="color: #D8DEE9FF"> </span><span style="color: #8FBCBB">bar</span><span style="color: #ECEFF4">=</span><span style="color: #81A1C1">true</span><span style="color: #D8DEE9FF"> </span><span style="color: #A3BE8C">&quot;baz&quot;</span><span style="color: #D8DEE9FF"> </span><span style="color: #8FBCBB">quux</span><span style="color: #ECEFF4">=</span><span style="color: #81A1C1">false</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">1</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">2</span><span style="color: #D8DEE9FF"> </span><span style="color: #B48EAD">3</span></span></code></pre>
-</section>
-<section class="kdl-section" id="implementations">
-<h2>Implementations</h2>
-<ul>
-<li>Rust: <a href="https://github.com/kdl-org/kdl-rs">kdl-rs</a>, <a href="https://crates.io/crates/knuffel/">knuffel</a> (latter includes derive macro), and <a href="https://github.com/Lucretiel/kaydle">kaydle</a> (serde-based)</li>
-<li>JavaScript: <a href="https://github.com/kdl-org/kdljs">kdljs</a>, <a href="https://github.com/virtualstate/kdl">@virtualstate/kdl</a> (query only, JSX based)</li>
-<li>Ruby: <a href="https://github.com/danini-the-panini/kdl-rb">kdl-rb</a></li>
-<li>Dart: <a href="https://github.com/danini-the-panini/kdl-dart">kdl-dart</a></li>
-<li>Java: <a href="https://github.com/hkolbeck/kdl4j">kdl4j</a></li>
-<li>PHP: <a href="https://github.com/kdl-org/kdl-php">kdl-php</a></li>
-<li>Python: <a href="https://github.com/tabatkins/kdlpy">kdl-py</a>, <a href="https://github.com/djmattyg007/python-cuddle">cuddle</a>, <a href="https://github.com/tjol/ckdl">ckdl</a></li>
-<li>Elixir: <a href="https://github.com/IceDragon200/kuddle">kuddle</a></li>
-<li>XSLT: <a href="https://github.com/Devasta/XML2KDL">xml2kdl</a></li>
-<li>Haskell: <a href="https://github.com/fuzzypixelz/Hustle">Hustle</a></li>
-<li>.NET: <a href="https://github.com/oledfish/Kadlet">Kadlet</a></li>
-<li>C: <a href="https://github.com/tjol/ckdl">ckdl</a></li>
-<li>C++: <a href="https://github.com/tjol/ckdl">kdlpp</a> (part of ckdl, requires C++20)</li>
-<li>OCaml: <a href="https://github.com/Bannerets/ocaml-kdl">ocaml-kdl</a></li>
-<li>Nim: <a href="https://github.com/Patitotective/kdl-nim">kdl-nim</a></li>
-<li>Common Lisp: <a href="https://github.com/chee/kdlcl">kdlcl</a></li>
-<li>Go: <a href="https://github.com/lunjon/gokdl">gokdl</a>, <a href="https://github.com/sblinch/kdl-go">kdl-go</a></li>
-<li>Swift: <a href="https://github.com/danini-the-panini/kdl-swift">kdl-swift</a></li>
-<li>Crystal: <a href="https://github.com/danini-the-panini/kdl-cr">kdl-cr</a></li>
-<li>Lua: <a href="https://github.com/danini-the-panini/kdlua">kdlua</a></li>
-</ul>
-<h2>Editor Support</h2>
-<ul>
-<li><a href="https://marketplace.visualstudio.com/items?itemName=kdl-org.kdl&amp;ssr=false#review-details">VS Code</a></li>
-<li><a href="https://packagecontrol.io/packages/KDL">Sublime Text</a></li>
-<li><a href="https://plugins.jetbrains.com/plugin/20136-kdl-document-language">Intellij IDEA</a></li>
-<li><a href="https://github.com/imsnif/kdl.vim">vim</a></li>
-</ul>
-</section>
-<section class="kdl-section" id="design-and-discussion">
-<h2>Design and Discussion</h2>
-<p>KDL is still extremely new, and discussion about the format should happen over
-on the <a href="https://github.com/kdl-org/kdl/discussions">discussions</a> page in the
-Github repo. Feel free to jump in and give us your 2 cents!</p>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#616E88">// Nodes can be separated into multiple lines</span></span>
+<span class="line"><span style="color:#81A1C1">title</span><span style="color:#D8DEE9FF"> \</span></span>
+<span class="line"><span style="color:#A3BE8C">  "Some title"</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#616E88">// Files must be utf8 encoded!</span></span>
+<span class="line"><span style="color:#81A1C1">smile</span><span style="color:#D8DEE9FF"> 😁</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#616E88">// Node names and property keys are just strings, so you can write them like</span></span>
+<span class="line"><span style="color:#616E88">// quoted or raw strings, too!</span></span>
+<span class="line"><span style="color:#A3BE8C">"illegal(){}[]/</span><span style="color:#EBCB8B">\\</span><span style="color:#A3BE8C">=#;identifier"</span><span style="color:#A3BE8C"> #"1.2.3"#</span><span style="color:#A3BE8C"> "#false"</span><span style="color:#D8DEE9FF">=</span><span style="color:#81A1C1">#true</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#616E88">// Identifiers are very flexible. The following is a legal bare identifier:</span></span>
+<span class="line"><span style="color:#81A1C1">-&#x3C;123~!$@%^&#x26;*,.:'`|?+></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#616E88">// And you can also use non-ASCII unicode!</span></span>
+<span class="line"><span style="color:#81A1C1">ノード</span><span style="color:#8FBCBB">　お名前</span><span style="color:#ECEFF4">=</span><span style="color:#A3BE8C">ฅ^</span><span style="color:#D8DEE9FF">•</span><span style="color:#A3BE8C">ﻌ</span><span style="color:#D8DEE9FF">•</span><span style="color:#A3BE8C">^ฅ</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#616E88">// kdl specifically allows properties and values to be</span></span>
+<span class="line"><span style="color:#616E88">// interspersed with each other, much like CLI commands.</span></span>
+<span class="line"><span style="color:#81A1C1">foo</span><span style="color:#8FBCBB"> bar</span><span style="color:#ECEFF4">=</span><span style="color:#81A1C1">#true</span><span style="color:#A3BE8C"> baz</span><span style="color:#8FBCBB"> quux</span><span style="color:#ECEFF4">=</span><span style="color:#81A1C1">#false</span><span style="color:#B48EAD"> 1</span><span style="color:#B48EAD"> 2</span><span style="color:#B48EAD"> 3</span></span>
+<span class="line"></span></code></pre>
 </section>
 <section class="kdl-section" id="design-principles">
 <h2>Design Principles</h2>
 <ol>
-<li>Maintainability</li>
+<li>Human Maintainability</li>
 <li>Flexibility</li>
-<li>Cognitive simplicity and Learnability</li>
+<li>Cognitive Simplicity and Learnability</li>
 <li>Ease of de/serialization</li>
 <li>Ease of implementation</li>
 </ol>
@@ -241,37 +495,52 @@ KDL that, even if not entirely idiomatic, is still valid and fits into the
 data models of the other two languages:</p>
 <ul>
 <li><a href="https://github.com/kdl-org/kdl/blob/main/JSON-IN-KDL.md">JSON in KDL</a></li>
-<li><a href="https://github.com/kdl-org/kdl/blob/main/XML-IN-KDL.md">XML in KDL</a></li>
+<li><a href="https://github.com/kdl-org/kdl/blob/main/JSON-IN-KDL.md">XML in KDL</a></li>
 </ul>
 </section>
-<section class="kdl-section" id="faq">
+<section class="kdl-section" id="compatibility-with-json-and-xml">
 <h2>FAQ</h2>
 <h4>How do you pronounce KDL?</h4>
 <p>Same as &quot;cuddle&quot;.</p>
 <h4>Why yet another document language?</h4>
 <p>Because nothing out there felt quite right. The closest one I found was
 SDLang, but that had some design choices I disagreed with.</p>
+<p><a name="why-not-sdlang"></a></p>
 <h4>Ok, then, why not SDLang?</h4>
-<p>SDLang is designed for use cases that are not interesting to me, but are very
-relevant to the D-lang community. KDL is very similar in many ways, but is
-different in the following ways:</p>
+<p>SDLang is an excellent base, but I wanted some details ironed out, and some
+things removed that only really made sense for SDLang's current use-cases, including
+some restrictions about data representation. KDL is very similar in many ways, except:</p>
 <ul>
-<li>The grammar and expected semantics are <a href="https://github.com/kdl-org/kdl/blob/main/SPEC.md">well-defined and specified</a>.</li>
-<li>There is only one &quot;number&quot; type. KDL does not prescribe representations.</li>
+<li>The grammar and expected semantics are <a href="SPEC.md">well-defined and specified</a>.
+This was the original impetus for working on KDL, followed by details that
+seemed like they could be improved.</li>
+<li>There is only one &quot;number&quot; type. KDL does not prescribe representations, but
+does have keywords for NaN, infinity, and negative infinity if decimal numbers
+are intended to be represtented as IEEE754 floats.</li>
 <li>Slashdash (<code>/-</code>) comments are great and useful!</li>
-<li>I am not interested in having first-class date types, and SDLang's are very
-non-standard.</li>
+<li>Quoteless &quot;identifier&quot; strings (e.g. <code>node foo=bar</code>, vs <code>node foo=&quot;bar&quot;</code>).</li>
+<li>KDL does not have first-class date or binary data types. Instead, it
+supports arbitrary type annotations for any custom data type you might need:
+<code>(date)&quot;2021-02-03&quot;</code>, <code>(binary)&quot;deadbeefbadc0ffee&quot;</code>.</li>
 <li>Values and properties can be interspersed with each other, rather than one
-having to follow the other.</li>
-<li>KDL does not have a first-class binary data type. Just use strings with base64.</li>
-<li>All strings in KDL are multi-line, and raw strings are written with
-Rust-style syntax (<code>r&quot;foo&quot;</code>), instead of backticks.</li>
-<li>KDL identifiers can use UTF-8 and are much more lax about symbols than SDLang.</li>
-<li>KDL does not support &quot;anonymous&quot; nodes.</li>
-<li>Instead, KDL supports arbitrary identifiers for node names and attribute
+having to follow the other. It was not clear whether this was actually allowed in SDLang.</li>
+<li>Multi-line strings are supported using <code>&quot;&quot;&quot;&lt;newline&gt;</code> and their lines are automatically
+&quot;dedented&quot; to match their closing quotes' indentation level.</li>
+<li>Raw strings are written with <code>#</code> (<code>#&quot;foo\bar&quot;#</code>), instead of backticks. This,
+while more verbose, allows embedding of languages, especially scripting
+languages, that use this syntax on a regular basis, without additional escaping
+(e.g. bash and JavaScript).</li>
+<li>KDL identifiers can use a wide range of UTF-8 and are much more lax about
+valid characters than SDLang.</li>
+<li>KDL does not support &quot;anonymous&quot; nodes. Instead, any string can be used as a
+node name. For lists of arbitrary values, there is a convention of naming the nodes
+simply <code>-</code>.</li>
+<li>Namespaces are not supported, but <code>:</code> is a legal identifier character, and applications
+can choose to implement namespaces as they see fit.</li>
+<li>KDL supports arbitrary identifiers for node names and attribute
 names, meaning you can use arbitrary strings for those: <code>&quot;123&quot; &quot;value&quot;=1</code> is
 a valid node, for example. This makes it easier to use KDL for
-representing arbitrary key/value pairs.</li>
+representing arbitrary key/value pairs using child nodes.</li>
 </ul>
 <h4>Have you seen that one XKCD comic about standards?</h4>
 <p>Yes. I have. Please stop linking me to it.</p>
@@ -296,7 +565,8 @@ unfortunate mistakes. It also has much more flexibility around how to
 represent data.</p>
 <p>If you need to interoperate with a service that consumes or emits JSON, or for
 some other reason have need to write &quot;JSON in KDL&quot;, <a href="https://github.com/kdl-org/kdl/blob/main/JSON-IN-KDL.md">we have JiK, an official
-microsyntax for losslessly encoding JSON</a>.</p>
+microsyntax for losslessly encoding
+JSON</a>.</p>
 <h4>What about TOML?</h4>
 <p>It nests very poorly. It doesn't fare well with large files.</p>
 <h4>What about XML?</h4>
@@ -321,7 +591,6 @@ fragments.</p>
 <p>If you need to interoperate with a service that consumes or emits XML, or for
 some other reason have need to write &quot;XML in KDL&quot;, <a href="https://github.com/kdl-org/kdl/blob/main/XML-IN-KDL.md">we have XiK, an official
 microsyntax for losslessly encoding XML</a>.</p>
-</section>
-</main>
+</section></main>
   </body>
 </html>
