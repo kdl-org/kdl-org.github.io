@@ -60,10 +60,13 @@ There's a living
 various [implementations](#implementations). You can also check out the
 [FAQ](#faq) to answer all your burning questions!
 
-The current version of the KDL spec is `2.0.0`. For legacy KDL, please refer to
-the [KDL 1.0 spec](https://github.com/kdl-org/kdl/blob/main/SPEC_v1.md). All
-users are encouraged to migrate. [Migration is forward-and-backward-compatible
-and safe](https://github.com/kdl-org/kdl/blob/main/SPEC.md#compatibility), and can be automated.
+The current version of the KDL spec is
+[KDL 2.0.0](https://github.com/kdl-org/kdl/blob/2.0.0/SPEC.md). For legacy KDL,
+please refer to the [KDL 1.0.0
+spec](https://github.com/kdl-org/kdl/blob/2.0.0/SPEC_v1.md). All users are
+encouraged to migrate. [Migration is forward-and-backward-compatible and
+safe](https://github.com/kdl-org/kdl/blob/2.0.0/SPEC.md#compatibility), and can
+be automated.
 
 In addition to a spec for KDL itself, there are specifications for [a KDL Query
 Language](https://github.com/kdl-org/kdl/blob/main/QUERY-SPEC.md) based on CSS selectors, and [a KDL Schema
@@ -114,7 +117,7 @@ of some examples of KDL in the wild (either v1, v2, or both):
 
 ## Implementations
 
-> [!INFO] There are two major versions of KDL. Different libraries may support one or the
+> There are two major versions of KDL. Different libraries may support one or the
 > other, or even provide a "hybrid" mode where both versions are attempted, since
 > there's no data ambiguity between v1 and v2 documents.
 
@@ -131,7 +134,7 @@ of some examples of KDL in the wild (either v1, v2, or both):
 | Go | [kdl-go](https://github.com/sblinch/kdl-go) | ✅ | ✖️ | |
 | Haskell | [Hustle](https://github.com/fuzzypixelz/Hustle) | ✅ | ✖️ | |
 | Java | [kdl4j](https://github.com/hkolbeck/kdl4j) | ✅ | ✖️ | |
-| JavaScript | [@bgotink/kdl](https://github.com/bgotink/kdl) | ✅* | ✅ | Format/comment-preserving parser |
+| JavaScript | [@bgotink/kdl](https://github.com/bgotink/kdl) | ✅ | ✅ | Format/comment-preserving parser |
 | JavaScript | [@virtualstate/kdl](https://github.com/virtualstate/kdl) | ✅ | ✖️ | query only, JSX based |
 | JavaScript | [kdljs](https://github.com/kdl-org/kdljs) | ✅ | ✖️ | |
 | Lua | [kdlua](https://github.com/danini-the-panini/kdlua) | ✅ | ✖️ | |
@@ -142,12 +145,10 @@ of some examples of KDL in the wild (either v1, v2, or both):
 | Python | [cuddle](https://github.com/djmattyg007/python-cuddle) | ✅ | ✖️ | |
 | Python | [kdl-py](https://github.com/tabatkins/kdlpy) | ✅ | ✅ | |
 | Ruby | [kdl-rb](https://github.com/danini-the-panini/kdl-rb) | ✅ | ✖️ | |
-| Rust | [kdl-rs](https://github.com/kdl-org/kdl-rs) | ✅* | ✅ | Format/comment-preserving parser |
-| Rust | [knuffel](https://crates.io/crates/knuffel/) | ✅ | ✖️ | Serde-_style_ derive macros (not actual Serde) | 
+| Rust | [kdl-rs](https://github.com/kdl-org/kdl-rs) | ✅ | ✅ | Format/comment-preserving parser |
+| Rust | [knus](https://crates.io/crates/knus/) | ✅ | ✖️ | Serde-_style_ derive macros (not actual Serde) | 
 | Swift | [kdl-swift](https://github.com/danini-the-panini/kdl-swift) | ✅ | ✖️ | |
 | XSLT | [xml2kdl](https://github.com/Devasta/XML2KDL) | ✅ | ✖️ | |
-
-\* Supported by earlier library version
 
 </section>
 
@@ -158,8 +159,10 @@ of some examples of KDL in the wild (either v1, v2, or both):
 * [Intellij IDEA](https://plugins.jetbrains.com/plugin/20136-kdl-document-language)
 * [Sublime Text](https://packagecontrol.io/packages/KDL)
 * [TreeSitter](https://github.com/tree-sitter-grammars/tree-sitter-kdl) (neovim, among others)
-* [VS Code](https://marketplace.visualstudio.com/items?itemName=kdl-org.kdl&ssr=false#review-details)
+* [VS Code](https://marketplace.visualstudio.com/items?itemName=kdl-org.kdl&ssr=false#review-details)\*
 * [vim](https://github.com/imsnif/kdl.vim)
+
+\* Supports KDL 2.0.0
 
 </section>
 
