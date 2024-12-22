@@ -112,206 +112,51 @@ of some examples of KDL in the wild (either v1, v2, or both):</p>
 </section>
 <section class="kdl-section" id="implementations">
 <h2>Implementations</h2>
-<blockquote>
-<p>There are two major versions of KDL. Different libraries may support one or the
-other, or even provide a &quot;hybrid&quot; mode where both versions are attempted, since
-there's no data ambiguity between v1 and v2 documents.</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Language</th>
-<th>Implementation</th>
-<th>v1</th>
-<th>v2</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>C</td>
-<td><a href="https://github.com/tjol/ckdl">ckdl</a></td>
-<td>✅</td>
-<td>✅</td>
-<td></td>
-</tr>
-<tr>
-<td>C#/.NET</td>
-<td><a href="https://github.com/oledfish/Kadlet">Kadlet</a></td>
-<td>✅</td>
-<td>✖️</td>
-<td></td>
-</tr>
-<tr>
-<td>C++</td>
-<td><a href="https://github.com/tjol/ckdl">kdlpp</a></td>
-<td>✅</td>
-<td>✅</td>
-<td>part of ckdl, requires C++20</td>
-</tr>
-<tr>
-<td>Common Lisp</td>
-<td><a href="https://github.com/chee/kdlcl">kdlcl</a></td>
-<td>✅</td>
-<td>✖️</td>
-<td></td>
-</tr>
-<tr>
-<td>Crystal</td>
-<td><a href="https://github.com/danini-the-panini/kdl-cr">kdl-cr</a></td>
-<td>✅</td>
-<td>✖️</td>
-<td></td>
-</tr>
-<tr>
-<td>Dart</td>
-<td><a href="https://github.com/danini-the-panini/kdl-dart">kdl-dart</a></td>
-<td>✅</td>
-<td>✖️</td>
-<td></td>
-</tr>
-<tr>
-<td>Elixir</td>
-<td><a href="https://github.com/IceDragon200/kuddle">kuddle</a></td>
-<td>✅</td>
-<td>✅</td>
-<td></td>
-</tr>
-<tr>
-<td>Go</td>
-<td><a href="https://github.com/lunjon/gokdl">gokdl</a></td>
-<td>✅</td>
-<td>✖️</td>
-<td></td>
-</tr>
-<tr>
-<td>Go</td>
-<td><a href="https://github.com/sblinch/kdl-go">kdl-go</a></td>
-<td>✅</td>
-<td>✖️</td>
-<td></td>
-</tr>
-<tr>
-<td>Haskell</td>
-<td><a href="https://github.com/fuzzypixelz/Hustle">Hustle</a></td>
-<td>✅</td>
-<td>✖️</td>
-<td></td>
-</tr>
-<tr>
-<td>Java</td>
-<td><a href="https://github.com/hkolbeck/kdl4j">kdl4j</a></td>
-<td>✅</td>
-<td>✖️</td>
-<td></td>
-</tr>
-<tr>
-<td>JavaScript</td>
-<td><a href="https://github.com/bgotink/kdl">@bgotink/kdl</a></td>
-<td>✅</td>
-<td>✅</td>
-<td>Format/comment-preserving parser</td>
-</tr>
-<tr>
-<td>JavaScript</td>
-<td><a href="https://github.com/virtualstate/kdl">@virtualstate/kdl</a></td>
-<td>✅</td>
-<td>✖️</td>
-<td>query only, JSX based</td>
-</tr>
-<tr>
-<td>JavaScript</td>
-<td><a href="https://github.com/kdl-org/kdljs">kdljs</a></td>
-<td>✅</td>
-<td>✖️</td>
-<td></td>
-</tr>
-<tr>
-<td>Lua</td>
-<td><a href="https://github.com/danini-the-panini/kdlua">kdlua</a></td>
-<td>✅</td>
-<td>✖️</td>
-<td></td>
-</tr>
-<tr>
-<td>Nim</td>
-<td><a href="https://github.com/Patitotective/kdl-nim">kdl-nim</a></td>
-<td>✅</td>
-<td>✖️</td>
-<td></td>
-</tr>
-<tr>
-<td>OCaml</td>
-<td><a href="https://github.com/Bannerets/ocaml-kdl">ocaml-kdl</a></td>
-<td>✅</td>
-<td>✖️</td>
-<td></td>
-</tr>
-<tr>
-<td>PHP</td>
-<td><a href="https://github.com/kdl-org/kdl-php">kdl-php</a></td>
-<td>✅</td>
-<td>✖️</td>
-<td></td>
-</tr>
-<tr>
-<td>Python</td>
-<td><a href="https://github.com/tjol/ckdl">ckdl</a></td>
-<td>✅</td>
-<td>✅</td>
-<td></td>
-</tr>
-<tr>
-<td>Python</td>
-<td><a href="https://github.com/djmattyg007/python-cuddle">cuddle</a></td>
-<td>✅</td>
-<td>✖️</td>
-<td></td>
-</tr>
-<tr>
-<td>Python</td>
-<td><a href="https://github.com/tabatkins/kdlpy">kdl-py</a></td>
-<td>✅</td>
-<td>✅</td>
-<td></td>
-</tr>
-<tr>
-<td>Ruby</td>
-<td><a href="https://github.com/danini-the-panini/kdl-rb">kdl-rb</a></td>
-<td>✅</td>
-<td>✖️</td>
-<td></td>
-</tr>
-<tr>
-<td>Rust</td>
-<td><a href="https://github.com/kdl-org/kdl-rs">kdl-rs</a></td>
-<td>✅</td>
-<td>✅</td>
-<td>Format/comment-preserving parser</td>
-</tr>
-<tr>
-<td>Rust</td>
-<td><a href="https://crates.io/crates/knus/">knus</a></td>
-<td>✅</td>
-<td>✖️</td>
-<td>Serde-<em>style</em> derive macros (not actual Serde)</td>
-</tr>
-<tr>
-<td>Swift</td>
-<td><a href="https://github.com/danini-the-panini/kdl-swift">kdl-swift</a></td>
-<td>✅</td>
-<td>✖️</td>
-<td></td>
-</tr>
-<tr>
-<td>XSLT</td>
-<td><a href="https://github.com/Devasta/XML2KDL">xml2kdl</a></td>
-<td>✅</td>
-<td>✖️</td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li>C - <a href="https://github.com/tjol/ckdl">ckdl</a>*</li>
+<li>C#/.NET - <a href="https://github.com/oledfish/Kadlet">Kadlet</a></li>
+<li>C++ - <a href="https://github.com/tjol/ckdl">kdlpp</a>* (part of ckdl, requires C++20)</li>
+<li>Common Lisp - <a href="https://github.com/chee/kdlcl">kdlcl</a></li>
+<li>Crystal - <a href="https://github.com/danini-the-panini/kdl-cr">kdl-cr</a></li>
+<li>Dart - <a href="https://github.com/danini-the-panini/kdl-dart">kdl-dart</a></li>
+<li>Elixir - <a href="https://github.com/IceDragon200/kuddle">kuddle</a>*</li>
+<li>Go -
+<ul>
+<li><a href="https://github.com/lunjon/gokdl">gokdl</a></li>
+<li><a href="https://github.com/sblinch/kdl-go">kdl-go</a></li>
+</ul>
+</li>
+<li>Haskell - <a href="https://github.com/fuzzypixelz/Hustle">Hustle</a></li>
+<li>Java - <a href="https://github.com/hkolbeck/kdl4j">kdl4j</a></li>
+<li>JavaScript -
+<ul>
+<li><a href="https://github.com/bgotink/kdl">@bgotink/kdl</a>* (Format/comment-preserving parser)</li>
+<li><a href="https://github.com/virtualstate/kdl">@virtualstate/kdl</a> (query only, JSX based)</li>
+<li><a href="https://github.com/kdl-org/kdljs">kdljs</a></li>
+</ul>
+</li>
+<li>Lua - <a href="https://github.com/danini-the-panini/kdlua">kdlua</a></li>
+<li>Nim - <a href="https://github.com/Patitotective/kdl-nim">kdl-nim</a></li>
+<li>OCaml - <a href="https://github.com/Bannerets/ocaml-kdl">ocaml-kdl</a></li>
+<li>PHP - <a href="https://github.com/kdl-org/kdl-php">kdl-php</a></li>
+<li>Python -
+<ul>
+<li><a href="https://github.com/tjol/ckdl">ckdl</a>*</li>
+<li><a href="https://github.com/djmattyg007/python-cuddle">cuddle</a></li>
+<li><a href="https://github.com/tabatkins/kdlpy">kdl-py</a>*</li>
+</ul>
+</li>
+<li>Ruby - <a href="https://github.com/danini-the-panini/kdl-rb">kdl-rb</a></li>
+<li>Rust -
+<ul>
+<li><a href="https://github.com/kdl-org/kdl-rs">kdl-rs</a> (Format/comment-preserving parser)*</li>
+<li><a href="https://crates.io/crates/knus/">knus</a> (Serde-<em>style</em> derive macros (not actual Serde))</li>
+</ul>
+</li>
+<li>Swift - <a href="https://github.com/danini-the-panini/kdl-swift">kdl-swift</a></li>
+<li>XSLT - <a href="https://github.com/Devasta/XML2KDL">xml2kdl</a></li>
+</ul>
+<p>* Supports both KDL v1 and v2</p>
 </section>
 <section class="kdl-section" id="editor-support">
 <h2>Editor Support</h2>
@@ -347,18 +192,18 @@ children.</p>
 <span class="line"></span></code></pre>
 <p>Nodes without children are terminated by a newline, a semicolon, or the end of
 a file stream:</p>
-<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">node1</span><span style="color:#D8DEE9FF">;</span><span style="color:#81A1C1"> node2</span><span style="color:#D8DEE9FF">;</span><span style="color:#81A1C1"> node3</span><span style="color:#D8DEE9FF">;</span></span>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">node1</span><span style="color:#D8DEE9FF">;</span><span style="color:#81A1C1"> node2</span><span style="color:#D8DEE9FF">;</span><span style="color:#81A1C1"> node3</span></span>
 <span class="line"></span></code></pre>
 <h3>Values</h3>
 <p>KDL supports 4 data types:</p>
 <ul>
 <li>Strings: <code>unquoted</code>, <code>&quot;hello world&quot;</code>, or <code>#&quot;hello world&quot;#</code></li>
-<li>Numbers: <code>123.45</code></li>
+<li>Numbers: <code>123.45</code>, <code>0xdeadbeef</code>, <code>#inf</code>, <code>#-inf</code>, <code>#nan</code></li>
 <li>Booleans: <code>#true</code> and <code>#false</code></li>
 <li>Null: <code>#null</code></li>
 </ul>
 <h4>Strings</h4>
-<p>It supports three different formats for string input: identifiers, quoted, and raw.</p>
+<p>It supports three different formats for string input: unquoted, quoted, and raw.</p>
 <pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">node1</span><span style="color:#A3BE8C"> this-is-a-string</span></span>
 <span class="line"><span style="color:#81A1C1">node2</span><span style="color:#A3BE8C"> "this</span><span style="color:#EBCB8B">\n</span><span style="color:#A3BE8C">has</span><span style="color:#EBCB8B">\t</span><span style="color:#A3BE8C">escapes"</span></span>
 <span class="line"><span style="color:#81A1C1">node3</span><span style="color:#A3BE8C"> #"C:\Users\zkat\raw\string"#</span></span>
@@ -571,7 +416,7 @@ some other reason have need to write &quot;JSON in KDL&quot;, <a href="https://g
 microsyntax for losslessly encoding
 JSON</a>.</p>
 <h4>What about TOML?</h4>
-<p>It nests very poorly. It doesn't fare well with large files.</p>
+<p>It nests very poorly. It doesn't fare well with large files. Also, I felt some discomfort <a href="https://en.wikipedia.org/wiki/Tom_Preston-Werner#Resignation_from_GitHub">continuing to use and promote something by its creator</a>.</p>
 <h4>What about XML?</h4>
 <p>XML is actually pretty fantastic, and has long been a standard for data
 exchange across many industries. At the same time, XML is known to be very
