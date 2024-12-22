@@ -69,10 +69,13 @@ XML. It looks like this:</p>
 <a href="https://github.com/kdl-org/kdl/blob/main/SPEC.md">specification</a>, as well as
 various <a href="#implementations">implementations</a>. You can also check out the
 <a href="#faq">FAQ</a> to answer all your burning questions!</p>
-<p>The current version of the KDL spec is <code>2.0.0</code>. For legacy KDL, please refer to
-the <a href="https://github.com/kdl-org/kdl/blob/main/SPEC_v1.md">KDL 1.0 spec</a>. All
-users are encouraged to migrate. <a href="https://github.com/kdl-org/kdl/blob/main/SPEC.md#compatibility">Migration is forward-and-backward-compatible
-and safe</a>, and can be automated.</p>
+<p>The current version of the KDL spec is
+<a href="https://github.com/kdl-org/kdl/blob/2.0.0/SPEC.md">KDL 2.0.0</a>. For legacy KDL,
+please refer to the <a href="https://github.com/kdl-org/kdl/blob/2.0.0/SPEC_v1.md">KDL 1.0.0
+spec</a>. All users are
+encouraged to migrate. <a href="https://github.com/kdl-org/kdl/blob/2.0.0/SPEC.md#compatibility">Migration is forward-and-backward-compatible and
+safe</a>, and can
+be automated.</p>
 <p>In addition to a spec for KDL itself, there are specifications for <a href="https://github.com/kdl-org/kdl/blob/main/QUERY-SPEC.md">a KDL Query
 Language</a> based on CSS selectors, and <a href="https://github.com/kdl-org/kdl/blob/main/SCHEMA-SPEC.md">a KDL Schema
 Language</a> loosely based on JSON Schema.</p>
@@ -110,7 +113,7 @@ of some examples of KDL in the wild (either v1, v2, or both):</p>
 <section class="kdl-section" id="implementations">
 <h2>Implementations</h2>
 <blockquote>
-<p>[!INFO] There are two major versions of KDL. Different libraries may support one or the
+<p>There are two major versions of KDL. Different libraries may support one or the
 other, or even provide a &quot;hybrid&quot; mode where both versions are attempted, since
 there's no data ambiguity between v1 and v2 documents.</p>
 </blockquote>
@@ -205,7 +208,7 @@ there's no data ambiguity between v1 and v2 documents.</p>
 <tr>
 <td>JavaScript</td>
 <td><a href="https://github.com/bgotink/kdl">@bgotink/kdl</a></td>
-<td>✅*</td>
+<td>✅</td>
 <td>✅</td>
 <td>Format/comment-preserving parser</td>
 </tr>
@@ -282,13 +285,13 @@ there's no data ambiguity between v1 and v2 documents.</p>
 <tr>
 <td>Rust</td>
 <td><a href="https://github.com/kdl-org/kdl-rs">kdl-rs</a></td>
-<td>✅*</td>
+<td>✅</td>
 <td>✅</td>
 <td>Format/comment-preserving parser</td>
 </tr>
 <tr>
 <td>Rust</td>
-<td><a href="https://crates.io/crates/knuffel/">knuffel</a></td>
+<td><a href="https://crates.io/crates/knus/">knus</a></td>
 <td>✅</td>
 <td>✖️</td>
 <td>Serde-<em>style</em> derive macros (not actual Serde)</td>
@@ -309,7 +312,6 @@ there's no data ambiguity between v1 and v2 documents.</p>
 </tr>
 </tbody>
 </table>
-<p>* Supported by earlier library version</p>
 </section>
 <section class="kdl-section" id="editor-support">
 <h2>Editor Support</h2>
@@ -317,9 +319,10 @@ there's no data ambiguity between v1 and v2 documents.</p>
 <li><a href="https://plugins.jetbrains.com/plugin/20136-kdl-document-language">Intellij IDEA</a></li>
 <li><a href="https://packagecontrol.io/packages/KDL">Sublime Text</a></li>
 <li><a href="https://github.com/tree-sitter-grammars/tree-sitter-kdl">TreeSitter</a> (neovim, among others)</li>
-<li><a href="https://marketplace.visualstudio.com/items?itemName=kdl-org.kdl&amp;ssr=false#review-details">VS Code</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=kdl-org.kdl&amp;ssr=false#review-details">VS Code</a>*</li>
 <li><a href="https://github.com/imsnif/kdl.vim">vim</a></li>
 </ul>
+<p>* Supports KDL 2.0.0</p>
 </section>
 <section class="kdl-section" id="overview">
 <h2>Overview</h2>
