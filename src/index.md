@@ -117,38 +117,38 @@ of some examples of KDL in the wild (either v1, v2, or both):
 
 ## Implementations
 
-> There are two major versions of KDL. Different libraries may support one or the
-> other, or even provide a "hybrid" mode where both versions are attempted, since
-> there's no data ambiguity between v1 and v2 documents.
+* C - [ckdl](https://github.com/tjol/ckdl)\*
+* C#/.NET - [Kadlet](https://github.com/oledfish/Kadlet) 
+* C++ - [kdlpp](https://github.com/tjol/ckdl)\* (part of ckdl, requires C++20)
+* Common Lisp - [kdlcl](https://github.com/chee/kdlcl)
+* Crystal - [kdl-cr](https://github.com/danini-the-panini/kdl-cr)
+* Dart - [kdl-dart](https://github.com/danini-the-panini/kdl-dart)
+* Elixir - [kuddle](https://github.com/IceDragon200/kuddle)\*
+* Go -
+  * [gokdl](https://github.com/lunjon/gokdl)
+  * [kdl-go](https://github.com/sblinch/kdl-go)
+* Haskell - [Hustle](https://github.com/fuzzypixelz/Hustle)
+* Java - [kdl4j](https://github.com/hkolbeck/kdl4j)
+* JavaScript -
+  * [@bgotink/kdl](https://github.com/bgotink/kdl)\* (Format/comment-preserving parser) 
+  * [@virtualstate/kdl](https://github.com/virtualstate/kdl) (query only, JSX based)
+  * [kdljs](https://github.com/kdl-org/kdljs)
+* Lua - [kdlua](https://github.com/danini-the-panini/kdlua)
+* Nim - [kdl-nim](https://github.com/Patitotective/kdl-nim)
+* OCaml - [ocaml-kdl](https://github.com/Bannerets/ocaml-kdl)
+* PHP - [kdl-php](https://github.com/kdl-org/kdl-php)
+* Python -
+  * [ckdl](https://github.com/tjol/ckdl)\*
+  * [cuddle](https://github.com/djmattyg007/python-cuddle)
+  * [kdl-py](https://github.com/tabatkins/kdlpy)\*
+* Ruby - [kdl-rb](https://github.com/danini-the-panini/kdl-rb)
+* Rust -
+  * [kdl-rs](https://github.com/kdl-org/kdl-rs) (Format/comment-preserving parser)\*
+  * [knus](https://crates.io/crates/knus/) (Serde-_style_ derive macros (not actual Serde))
+* Swift - [kdl-swift](https://github.com/danini-the-panini/kdl-swift)
+* XSLT - [xml2kdl](https://github.com/Devasta/XML2KDL)
 
-| Language | Implementation | v1 | v2 | Notes |
-|---|---|---|---|---|
-| C | [ckdl](https://github.com/tjol/ckdl) | ✅ | ✅ | |
-| C#/.NET | [Kadlet](https://github.com/oledfish/Kadlet) | ✅ | ✖️ | |
-| C++ | [kdlpp](https://github.com/tjol/ckdl) | ✅ | ✅ | part of ckdl, requires C++20 |
-| Common Lisp | [kdlcl](https://github.com/chee/kdlcl) | ✅ | ✖️ | |
-| Crystal | [kdl-cr](https://github.com/danini-the-panini/kdl-cr) | ✅ | ✖️ | |
-| Dart | [kdl-dart](https://github.com/danini-the-panini/kdl-dart) | ✅ | ✖️ | |
-| Elixir | [kuddle](https://github.com/IceDragon200/kuddle) | ✅ | ✅ | |
-| Go | [gokdl](https://github.com/lunjon/gokdl) | ✅ | ✖️ | |
-| Go | [kdl-go](https://github.com/sblinch/kdl-go) | ✅ | ✖️ | |
-| Haskell | [Hustle](https://github.com/fuzzypixelz/Hustle) | ✅ | ✖️ | |
-| Java | [kdl4j](https://github.com/hkolbeck/kdl4j) | ✅ | ✖️ | |
-| JavaScript | [@bgotink/kdl](https://github.com/bgotink/kdl) | ✅ | ✅ | Format/comment-preserving parser |
-| JavaScript | [@virtualstate/kdl](https://github.com/virtualstate/kdl) | ✅ | ✖️ | query only, JSX based |
-| JavaScript | [kdljs](https://github.com/kdl-org/kdljs) | ✅ | ✖️ | |
-| Lua | [kdlua](https://github.com/danini-the-panini/kdlua) | ✅ | ✖️ | |
-| Nim | [kdl-nim](https://github.com/Patitotective/kdl-nim) | ✅ | ✖️ | |
-| OCaml | [ocaml-kdl](https://github.com/Bannerets/ocaml-kdl) | ✅ | ✖️ | |
-| PHP | [kdl-php](https://github.com/kdl-org/kdl-php) | ✅ | ✖️ | |
-| Python | [ckdl](https://github.com/tjol/ckdl) | ✅ | ✅ | |
-| Python | [cuddle](https://github.com/djmattyg007/python-cuddle) | ✅ | ✖️ | |
-| Python | [kdl-py](https://github.com/tabatkins/kdlpy) | ✅ | ✅ | |
-| Ruby | [kdl-rb](https://github.com/danini-the-panini/kdl-rb) | ✅ | ✖️ | |
-| Rust | [kdl-rs](https://github.com/kdl-org/kdl-rs) | ✅ | ✅ | Format/comment-preserving parser |
-| Rust | [knus](https://crates.io/crates/knus/) | ✅ | ✖️ | Serde-_style_ derive macros (not actual Serde) | 
-| Swift | [kdl-swift](https://github.com/danini-the-panini/kdl-swift) | ✅ | ✖️ | |
-| XSLT | [xml2kdl](https://github.com/Devasta/XML2KDL) | ✅ | ✖️ | |
+\* Supports both KDL v1 and v2
 
 </section>
 
@@ -206,7 +206,7 @@ Nodes without children are terminated by a newline, a semicolon, or the end of
 a file stream:
 
 ```kdl
-node1; node2; node3;
+node1; node2; node3
 ```
 
 ### Values
@@ -214,13 +214,13 @@ node1; node2; node3;
 KDL supports 4 data types:
 
 * Strings: `unquoted`, `"hello world"`, or `#"hello world"#`
-* Numbers: `123.45`
+* Numbers: `123.45`, `0xdeadbeef`, `#inf`, `#-inf`, `#nan`
 * Booleans: `#true` and `#false`
 * Null: `#null`
 
 #### Strings
 
-It supports three different formats for string input: identifiers, quoted, and raw.
+It supports three different formats for string input: unquoted, quoted, and raw.
 
 ```kdl
 node1 this-is-a-string
@@ -494,7 +494,7 @@ JSON](https://github.com/kdl-org/kdl/blob/main/JSON-IN-KDL.md).
 
 #### What about TOML?
 
-It nests very poorly. It doesn't fare well with large files.
+It nests very poorly. It doesn't fare well with large files. Also, I felt some discomfort [continuing to use and promote something by its creator](https://en.wikipedia.org/wiki/Tom_Preston-Werner#Resignation_from_GitHub).
 
 #### What about XML?
 
