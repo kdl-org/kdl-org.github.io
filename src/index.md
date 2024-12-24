@@ -141,7 +141,7 @@ of some examples of KDL in the wild (either v1, v2, or both):
   * [ckdl](https://github.com/tjol/ckdl)\*
   * [cuddle](https://github.com/djmattyg007/python-cuddle)
   * [kdl-py](https://github.com/tabatkins/kdlpy)\*
-* Ruby - [kdl-rb](https://github.com/danini-the-panini/kdl-rb)
+* Ruby - [kdl-rb](https://github.com/danini-the-panini/kdl-rb)\*
 * Rust -
   * [kdl-rs](https://github.com/kdl-org/kdl-rs) (Format/comment-preserving parser)\*
   * [knus](https://crates.io/crates/knus/) (Serde-_style_ derive macros (not actual Serde))
