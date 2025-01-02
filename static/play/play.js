@@ -122,6 +122,27 @@ addEventListener("DOMContentLoaded", (event) => {
           endLineNumber: error.token?.end.line,
           endColumn: error.token?.end.column,
         })
+      } else if (typeof AggregateError === 'function' && error instanceof AggregateError) {
+        for (const suberror of error.errors) {
+          if (suberror instanceof KDL.InvalidKdlError) {
+            markers.push({
+              message: suberror.message,
+              severity: monaco.MarkerSeverity.Error,
+              startLineNumber: suberror.token?.start.line,
+              startColumn: suberror.token?.start.column,
+              endLineNumber: suberror.token?.end.line,
+              endColumn: suberror.token?.end.column,
+            })
+          } else {
+            console.error(suberror);
+            markers.push({
+              message: "Failed to parse KDL",
+              severity: monaco.MarkerSeverity.Error,
+              startLineNumber: 1,
+              startColumn: 1,
+            })
+          }
+        }
       } else {
         console.error(error)
         markers.push({
