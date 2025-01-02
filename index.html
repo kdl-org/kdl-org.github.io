@@ -5,22 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="kdl is a document language, mostly based on SDLang, with xml-like semantics that looks like you're invoking a bunch of CLI commands!"
+      content="This is the KDL playground: try out KDL documents and see the resulting structure!"
     />
     <title>The KDL Document Language</title>
 
-    <link rel="stylesheet" href="/styles/global.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon-DYakp7eY.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32-DyPo_U_s.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16-CySQqJXs.png">
+    <link rel="manifest" href="/assets/site-n2cPdmrr.webmanifest">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-
+    <link rel="stylesheet" crossorigin href="/assets/index-D8sN9JUE.css">
   </head>
   <body>
     <main><header class="pt-20 pb-10 px-4">
-  <img src="./logo-with-tagline.svg" class="mx-auto h-40" alt="KDL: A cuddly document language">
+  <img src="/assets/logo-with-tagline-CHWKIwA-.svg" class="mx-auto h-40" alt="KDL: A cuddly document language">
 </header>
 <section class="kdl-section" id="description">
 <p>KDL is a small, pleasant document language with XML-like node semantics that
@@ -64,7 +63,8 @@ XML. It looks like this:</p>
 <span class="line"><span style="color:#D8DEE9FF">  }</span></span>
 <span class="line"><span style="color:#D8DEE9FF">}</span></span>
 <span class="line"></span></code></pre>
-<p>For more details, see the <a href="#overview">overview below</a>.</p>
+<p>For more details, see the <a href="#overview">overview below</a>. <a href="./play/">Play with it in your
+browser!</a></p>
 <p>There's a living
 <a href="https://github.com/kdl-org/kdl/blob/main/SPEC.md">specification</a>, as well as
 various <a href="#implementations">implementations</a>. You can also check out the
@@ -82,7 +82,6 @@ Language</a> loosely based on JSON Schema.</p>
 <p>The language is based on <a href="https://sdlang.org">SDLang</a>, with a <a href="#why-not-sdlang">number of
 modifications and clarifications on its syntax and behavior</a>.
 We are grateful for their work as an inspiration to ours.</p>
-<p><a href="https://kdl-play.danini.dev/">Play with it in your browser (currently v1 only)!</a></p>
 </section>
 <section class="kdl-section" id="design-and-discussion">
 <h2>Design and Discussion</h2>
@@ -359,7 +358,7 @@ SDLang, but that had some design choices I disagreed with.</p>
 things removed that only really made sense for SDLang's current use-cases, including
 some restrictions about data representation. KDL is very similar in many ways, except:</p>
 <ul>
-<li>The grammar and expected semantics are <a href="SPEC.md">well-defined and specified</a>.
+<li>The grammar and expected semantics are <a href="https://github.com/kdl-org/kdl/blob/main/SPEC.md">well-defined and specified</a>.
 This was the original impetus for working on KDL, followed by details that
 seemed like they could be improved.</li>
 <li>There is only one &quot;number&quot; type. KDL does not prescribe representations, but
