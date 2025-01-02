@@ -1,8 +1,10 @@
 import { createHighlighter } from "shiki";
+import eleventyPluginVite from "@11ty/eleventy-plugin-vite";
 import path from "node:path";
 import { readFile } from "node:fs/promises";
 
 export default function (eleventyConfig) {
+  eleventyConfig.addPlugin(eleventyPluginVite);
   eleventyConfig.addPassthroughCopy("src/CNAME");
   eleventyConfig.addMarkdownHighlighter(shikiHighlight);
 

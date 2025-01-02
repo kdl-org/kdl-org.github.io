@@ -53,7 +53,8 @@ package {
 }
 ```
 
-For more details, see the [overview below](#overview).
+For more details, see the [overview below](#overview). [Play with it in your
+browser!](./play/)
 
 There's a living
 [specification](https://github.com/kdl-org/kdl/blob/main/SPEC.md), as well as
@@ -75,8 +76,6 @@ Language](https://github.com/kdl-org/kdl/blob/main/SCHEMA-SPEC.md) loosely based
 The language is based on [SDLang](https://sdlang.org), with a [number of
 modifications and clarifications on its syntax and behavior](#why-not-sdlang).
 We are grateful for their work as an inspiration to ours.
-
-[Play with it in your browser (currently v1 only)!](https://kdl-play.danini.dev/)
 
 </section>
 
@@ -426,7 +425,7 @@ SDLang is an excellent base, but I wanted some details ironed out, and some
 things removed that only really made sense for SDLang's current use-cases, including
 some restrictions about data representation. KDL is very similar in many ways, except:
 
-* The grammar and expected semantics are [well-defined and specified](SPEC.md).
+* The grammar and expected semantics are [well-defined and specified](https://github.com/kdl-org/kdl/blob/main/SPEC.md).
   This was the original impetus for working on KDL, followed by details that
   seemed like they could be improved.
 * There is only one "number" type. KDL does not prescribe representations, but
