@@ -7,7 +7,7 @@
     "static": "cp -r static/* docs",
     "build": "npm run clean && npm run static && postcss src/styles/global.css > docs/styles/global.css && postcss src/styles/play.css > docs/styles/play.css",
     "dev": "npm run build && eleventy --config=.eleventy.mjs --serve",
-    "prod": "NODE_ENV=production npm run build && eleventy --config=.eleventy.mjs",
+    "prod": "NODE_ENV=production npm run build && eleventy --config=.eleventy.mjs && cp src/CNAME docs",
     "format": "prettier --write src ./*.js ./.*.js"
   },
   "keywords": [],
