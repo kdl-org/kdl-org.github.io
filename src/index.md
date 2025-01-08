@@ -132,7 +132,7 @@ of some examples of KDL in the wild (either v1, v2, or both):
 * JavaScript -
   * [@bgotink/kdl](https://github.com/bgotink/kdl)\* (Format/comment-preserving parser) 
   * [@virtualstate/kdl](https://github.com/virtualstate/kdl) (query only, JSX based)
-  * [kdljs](https://github.com/kdl-org/kdljs)
+  * [kdljs](https://github.com/kdl-org/kdljs)\*
 * Lua - [kdlua](https://github.com/danini-the-panini/kdlua)
 * Nim - [kdl-nim](https://github.com/Patitotective/kdl-nim)
 * OCaml - [ocaml-kdl](https://github.com/Bannerets/ocaml-kdl)
