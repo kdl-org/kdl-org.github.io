@@ -117,10 +117,10 @@ addEventListener("DOMContentLoaded", (event) => {
         markers.push({
           message: error.message,
           severity: monaco.MarkerSeverity.Error,
-          startLineNumber: error.token?.start.line,
-          startColumn: error.token?.start.column,
-          endLineNumber: error.token?.end.line,
-          endColumn: error.token?.end.column,
+          startLineNumber: error.start?.line,
+          startColumn: error.start?.column,
+          endLineNumber: error.end?.line,
+          endColumn: error.end?.column,
         })
       } else if (typeof AggregateError === 'function' && error instanceof AggregateError) {
         for (const suberror of error.errors) {
@@ -128,10 +128,10 @@ addEventListener("DOMContentLoaded", (event) => {
             markers.push({
               message: suberror.message,
               severity: monaco.MarkerSeverity.Error,
-              startLineNumber: suberror.token?.start.line,
-              startColumn: suberror.token?.start.column,
-              endLineNumber: suberror.token?.end.line,
-              endColumn: suberror.token?.end.column,
+              startLineNumber: suberror.start?.line,
+              startColumn: suberror.start?.column,
+              endLineNumber: suberror.end?.line,
+              endColumn: suberror.end?.column,
             })
           } else {
             console.error(suberror);
