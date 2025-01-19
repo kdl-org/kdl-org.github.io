@@ -57,16 +57,16 @@ For more details, see the [overview below](#overview). [Play with it in your
 browser!](./play/)
 
 There's a living
-[specification](https://github.com/kdl-org/kdl/blob/main/SPEC.md), as well as
+[specification](/spec), as well as
 various [implementations](#implementations). You can also check out the
 [FAQ](#faq) to answer all your burning questions!
 
 The current version of the KDL spec is
-[KDL 2.0.0](https://github.com/kdl-org/kdl/blob/2.0.0/SPEC.md). For legacy KDL,
+[KDL 2.0.0](/spec). For legacy KDL,
 please refer to the [KDL 1.0.0
-spec](https://github.com/kdl-org/kdl/blob/2.0.0/SPEC_v1.md). All users are
+spec](/spec-v1). All users are
 encouraged to migrate. [Migration is forward-and-backward-compatible and
-safe](https://github.com/kdl-org/kdl/blob/2.0.0/SPEC.md#compatibility), and can
+safe](/spec#compatibility), and can
 be automated.
 
 In addition to a spec for KDL itself, there are specifications for [a KDL Query
