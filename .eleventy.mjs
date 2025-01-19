@@ -6,6 +6,7 @@ import { readFile } from "node:fs/promises";
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(eleventyPluginVite);
   eleventyConfig.addPassthroughCopy("src/CNAME");
+  eleventyConfig.addPassthroughCopy("src/spec.txt");
   eleventyConfig.addMarkdownHighlighter(shikiHighlight);
 
   return {
