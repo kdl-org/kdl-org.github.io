@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="kdl is a document language, mostly based on SDLang, with xml-like semantics that looks like you're invoking a bunch of CLI commands!"
+    />
+    <title>KDL v1 Specification</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon-DYakp7eY.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32-DyPo_U_s.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16-CySQqJXs.png">
+    <link rel="manifest" href="/assets/site-n2cPdmrr.webmanifest">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" crossorigin href="/assets/global-DvdzMk0y.css">
+  </head>
+  <body>
+    <main><h1>KDL v1 Spec</h1>
+<p>This is the semi-formal specification for the legacy version of KDL, including
+the intended data model and the grammar.</p>
+<p>This document describes KDL version <code>1.0.0</code>. It was released on September 11, 2021.</p>
+<p>Information in this spec is intended as both an accessible historical record,
+and a reference for KDL implementors who are interested in supporting both major
+versions of the language.</p>
+<p>The v1 spec will not receive further updates outside of minor, inconsequential
+rewordings or other superficial fixes and is considered a &quot;legacy&quot; version.</p>
+<h2>Compatibility</h2>
+<p>KDL v2 is designed such that for any given KDL document in either v1 or v2, the
+parse will either fail completely, or, if the parse succeeds, the data
+represented by a v1 or v2 parser will be identical. This means that it's safe to
+use a fallback parsing strategy in order to support both v1 and v2
+simultaneously. For example, <code>node &quot;foo&quot;</code> is a valid node in both versions, and
+should be represented identically by parsers.</p>
+<p>KDL v2 is designed such that for any given KDL document written as KDL
+1.0 or <a href="/spec">KDL 2.0</a>,
+the parse will either fail completely, or, if the
+parse succeeds, the data represented by a v1 or v2 parser will be identical.
+This means that it's safe to use a fallback parsing strategy in order to support
+both v1 and v2 simultaneously. For example, <code>node &quot;foo&quot;</code> is a valid node in both
+versions, and should be represented identically by parsers.</p>
+<p>A version marker <code>/- kdl-version 1</code> (or <code>2</code>) <em>MAY</em> be added to the beginning of
+a KDL document, optionally preceded by the BOM, and parsers <em>MAY</em> use that as a
+hint as to which version to parse the document as.</p>
+<h2>Introduction</h2>
+<p>KDL is a node-oriented document language. Its niche and purpose overlaps with
+XML, and as do many of its semantics. You can use KDL both as a configuration
+language, and a data exchange or storage format, if you so choose.</p>
+<p>The bulk of this document is dedicated to a long-form description of all
+<a href="#components">Components</a> of a KDL document. There is also a much more terse
+<a href="#full-grammar">Grammar</a> at the end of the document that covers most of the
+rules, with some semantic exceptions involving the data model.</p>
+<p>KDL is designed to be easy to read <em>and</em> easy to implement.</p>
+<p>In this document, references to &quot;left&quot; or &quot;right&quot; refer to directions in the
+<em>data stream</em> towards the beginning or end, respectively; in other words,
+the directions if the data stream were only ASCII text. They do not refer
+to the writing direction of text, which can flow in either direction,
+depending on the characters used.</p>
+<h2>Components</h2>
+<h3>Document</h3>
+<p>The toplevel concept of KDL is a Document. A Document is composed of zero or
+more <a href="#node">Nodes</a>, separated by newlines and whitespace, and eventually
+terminated by an EOF.</p>
+<p>All KDL documents should be UTF-8 encoded and conform to the specifications in
+this document.</p>
+<h4>Example</h4>
+<p>The following is a document composed of two toplevel nodes:</p>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">foo</span><span style="color:#D8DEE9FF"> {</span></span>
+<span class="line"><span style="color:#81A1C1">    bar</span></span>
+<span class="line"><span style="color:#D8DEE9FF">}</span></span>
+<span class="line"><span style="color:#81A1C1">baz</span></span>
+<span class="line"></span></code></pre>
+<h3>Node</h3>
+<p>Being a node-oriented language means that the real core component of any KDL
+document is the &quot;node&quot;. Every node must have a name, which is an
+<a href="#identifier">Identifier</a>.</p>
+<p>The name may be preceded by a <a href="#type-annotation">Type Annotation</a> to further
+clarify its type, particularly in relation to its parent node. (For example,
+clarifying that a particular <code>date</code> child node is for the <em>publication</em> date,
+rather than the last-modified date, with <code>(published)date</code>.)</p>
+<p>Following the name are zero or more <a href="#argument">Arguments</a> or
+<a href="#property">Properties</a>, separated by either <a href="#whitespace">whitespace</a> or <a href="#line-continuation">a
+slash-escaped line continuation</a>. Arguments and Properties
+may be interspersed in any order, much like is common with positional
+arguments vs options in command line tools.</p>
+<p><a href="#children-block">Children</a> can be placed after the name and the optional
+Arguments and Properties, possibly separated by either whitespace or a
+slash-escaped line continuation.</p>
+<p>Arguments are ordered relative to each other (but not relative to Properties)
+and that order must be preserved in order to maintain the semantics.</p>
+<p>By contrast, Property order <em>SHOULD NOT</em> matter to implementations.
+<a href="#children-block">Children</a> should be used if an order-sensitive key/value
+data structure must be represented in KDL.</p>
+<p>Nodes <em>MAY</em> be prefixed with <code>/-</code> to &quot;comment out&quot; the entire node, including
+its properties, arguments, and children, and make it act as plain whitespace,
+even if it spreads across multiple lines.</p>
+<p>Finally, a node is terminated by either a <a href="#newline">Newline</a>, a semicolon (<code>;</code>)
+or the end of the file/stream (an <code>EOF</code>).</p>
+<h4>Example</h4>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">foo</span><span style="color:#B48EAD"> 1</span><span style="color:#8FBCBB"> key</span><span style="color:#ECEFF4">=</span><span style="color:#A3BE8C">"val"</span><span style="color:#B48EAD"> 3</span><span style="color:#D8DEE9FF"> {</span></span>
+<span class="line"><span style="color:#81A1C1">    bar</span></span>
+<span class="line"><span style="color:#81A1C1">    (role)baz</span><span style="color:#B48EAD"> 1</span><span style="color:#B48EAD"> 2</span></span>
+<span class="line"><span style="color:#D8DEE9FF">}</span></span>
+<span class="line"></span></code></pre>
+<h3>Identifier</h3>
+<p>An Identifier is either a <a href="#bare-identifier">Bare Identifier</a>, which is an
+unquoted string like <code>node</code> or <code>item</code>, or a <a href="#string">String</a>, which is quoted,
+like <code>&quot;node&quot;</code> or <code>&quot;two words&quot;</code>. There's no semantic difference between the
+kinds of identifier; this simply allows for the use of quotes to have unusual
+identifiers that are inexpressible as bare identifiers.</p>
+<h3>Bare Identifier</h3>
+<p>A Bare Identifier is composed of any Unicode codepoint other than <a href="#non-initial-characters">non-initial
+characters</a>, followed by any number of Unicode
+codepoints other than <a href="#non-identifier-characters">non-identifier characters</a>,
+so long as this doesn't produce something confusable for a <a href="#number">Number</a>,
+<a href="#boolean">Boolean</a>, or <a href="#null">Null</a>. For example, both a <a href="#number">Number</a>
+and an Identifier can start with <code>-</code>, but when an Identifier starts with <code>-</code>
+the second character cannot be a digit. This is precisely specified in the
+<a href="#full-grammar">Full Grammar</a> below.</p>
+<p>Identifiers are terminated by <a href="#whitespace">Whitespace</a> or
+<a href="#newline">Newlines</a>.</p>
+<h3>Non-initial characters</h3>
+<p>The following characters cannot be the first character in a
+<a href="#identifier">Bare Identifier</a>:</p>
+<ul>
+<li>Any decimal digit (0-9)</li>
+<li>Any <a href="#non-identifier-characters">non-identifier characters</a></li>
+</ul>
+<p>Be aware that the <code>-</code> character can only be used as an initial
+character if the second character is not a digit. This allows
+identifiers to look like <code>--this</code>, and removes the ambiguity
+of having an identifier look like a negative number.</p>
+<h3>Non-identifier characters</h3>
+<p>The following characters cannot be used anywhere in a <a href="#identifier">Bare Identifier</a>:</p>
+<ul>
+<li>Any codepoint with hexadecimal value <code>0x20</code> or below.</li>
+<li>Any codepoint with hexadecimal value higher than <code>0x10FFFF</code>.</li>
+<li>Any of <code>\/(){}&lt;&gt;;[]=,&quot;</code></li>
+</ul>
+<h3>Line Continuation</h3>
+<p>Line continuations allow <a href="#node">Nodes</a> to be spread across multiple lines.</p>
+<p>A line continuation is a <code>\</code> character followed by zero or more whitespace
+characters and an optional single-line comment. It must be terminated by a
+<a href="#newline">Newline</a> (including the Newline that is part of single-line comments).</p>
+<p>Following a line continuation, processing of a Node can continue as usual.</p>
+<h4>Example</h4>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">my-node</span><span style="color:#B48EAD"> 1</span><span style="color:#B48EAD"> 2</span><span style="color:#D8DEE9FF"> \  </span><span style="color:#616E88">// comments are ok after \</span></span>
+<span class="line"><span style="color:#81A1C1">        3</span><span style="color:#B48EAD"> 4</span><span style="color:#616E88">    // This is the actual end of the Node.</span></span>
+<span class="line"></span></code></pre>
+<h3>Property</h3>
+<p>A Property is a key/value pair attached to a <a href="#node">Node</a>. A Property is
+composed of an <a href="#identifier">Identifier</a>, followed immediately by a <code>=</code>, and then a <a href="#value">Value</a>.</p>
+<p>Properties should be interpreted left-to-right, with rightmost properties with
+identical names overriding earlier properties. That is:</p>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">node</span><span style="color:#8FBCBB"> a</span><span style="color:#ECEFF4">=</span><span style="color:#B48EAD">1</span><span style="color:#8FBCBB"> a</span><span style="color:#ECEFF4">=</span><span style="color:#B48EAD">2</span></span>
+<span class="line"></span></code></pre>
+<p>In this example, the node's <code>a</code> value must be <code>2</code>, not <code>1</code>.</p>
+<p>No other guarantees about order should be expected by implementers.
+Deserialized representations may iterate over properties in any order and
+still be spec-compliant.</p>
+<p>Properties <em>MAY</em> be prefixed with <code>/-</code> to &quot;comment out&quot; the entire token and
+make it act as plain whitespace, even if it spreads across multiple lines.</p>
+<h3>Argument</h3>
+<p>An Argument is a bare <a href="#value">Value</a> attached to a <a href="#node">Node</a>, with no
+associated key. It shares the same space as <a href="#properties">Properties</a>, and may be interleaved with them.</p>
+<p>A Node may have any number of Arguments, which should be evaluated left to
+right. KDL implementations <em>MUST</em> preserve the order of Arguments relative to
+each other (not counting Properties).</p>
+<p>Arguments <em>MAY</em> be prefixed with <code>/-</code> to &quot;comment out&quot; the entire token and
+make it act as plain whitespace, even if it spreads across multiple lines.</p>
+<h4>Example</h4>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">my-node</span><span style="color:#B48EAD"> 1</span><span style="color:#B48EAD"> 2</span><span style="color:#B48EAD"> 3</span><span style="color:#A3BE8C"> "a"</span><span style="color:#A3BE8C"> "b"</span><span style="color:#A3BE8C"> "c"</span></span>
+<span class="line"></span></code></pre>
+<h3>Children Block</h3>
+<p>A children block is a block of <a href="#node">Nodes</a>, surrounded by <code>{</code> and <code>}</code>. They
+are an optional part of nodes, and create a hierarchy of KDL nodes.</p>
+<p>Regular node termination rules apply, which means multiple nodes can be
+included in a single-line children block, as long as they're all terminated by
+<code>;</code>.</p>
+<h4>Example</h4>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">parent</span><span style="color:#D8DEE9FF"> {</span></span>
+<span class="line"><span style="color:#81A1C1">    child1</span></span>
+<span class="line"><span style="color:#81A1C1">    child2</span></span>
+<span class="line"><span style="color:#D8DEE9FF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#81A1C1">parent</span><span style="color:#D8DEE9FF"> {</span><span style="color:#81A1C1"> child1</span><span style="color:#D8DEE9FF">;</span><span style="color:#81A1C1"> child2</span><span style="color:#D8DEE9FF">; }</span></span>
+<span class="line"></span></code></pre>
+<h3>Value</h3>
+<p>A value is either: a <a href="#string">String</a>, a <a href="#number">Number</a>, a
+<a href="#boolean">Boolean</a>, or <a href="#null">Null</a>.</p>
+<p>Values <em>MUST</em> be either <a href="#argument">Arguments</a> or values of
+<a href="#property">Properties</a>.</p>
+<p>Values (both as arguments and as properties) <em>MAY</em> be prefixed by a single
+<a href="#type-annotation">Type Annotation</a>.</p>
+<h3>Type Annotation</h3>
+<p>A type annotation is a prefix to any <a href="#node">Node Name</a> or <a href="#value">Value</a> that
+includes a <em>suggestion</em> of what type the value is <em>intended</em> to be treated as,
+or as a <em>context-specific elaboration</em> of the more generic type the node name
+indicates.</p>
+<p>Type annotations are written as a set of <code>(</code> and <code>)</code> with an
+<a href="#identifier">Identifier</a> in it. Any valid identifier is considered a valid
+type annotation. There must be no whitespace between a type annotation and its
+associated Node Name or Value.</p>
+<p>KDL does not specify any restrictions on what implementations might do with
+these annotations. They are free to ignore them, or use them to make decisions
+about how to interpret a value.</p>
+<p>Additionally, the following type annotations MAY be recognized by KDL parsers
+and, if used, SHOULD interpret these types as follows:</p>
+<h4>Reserved Type Annotations for Numbers Without Decimals:</h4>
+<p>Signed integers of various sizes (the number is the bit size):</p>
+<ul>
+<li><code>i8</code></li>
+<li><code>i16</code></li>
+<li><code>i32</code></li>
+<li><code>i64</code></li>
+</ul>
+<p>Unsigned integers of various sizes (the number is the bit size):</p>
+<ul>
+<li><code>u8</code></li>
+<li><code>u16</code></li>
+<li><code>u32</code></li>
+<li><code>u64</code></li>
+</ul>
+<p>Platform-dependent integer types, both signed and unsigned:</p>
+<ul>
+<li><code>isize</code></li>
+<li><code>usize</code></li>
+</ul>
+<h4>Reserved Type Annotations for Numbers With Decimals:</h4>
+<p>IEEE 754 floating point numbers, both single (32) and double (64) precision:</p>
+<ul>
+<li><code>f32</code></li>
+<li><code>f64</code></li>
+</ul>
+<p>IEEE 754-2008 decimal floating point numbers</p>
+<ul>
+<li><code>decimal64</code></li>
+<li><code>decimal128</code></li>
+</ul>
+<h4>Reserved Type Annotations for Strings:</h4>
+<ul>
+<li><code>date-time</code>: ISO8601 date/time format.</li>
+<li><code>time</code>: &quot;Time&quot; section of ISO8601.</li>
+<li><code>date</code>: &quot;Date&quot; section of ISO8601.</li>
+<li><code>duration</code>: ISO8601 duration format.</li>
+<li><code>decimal</code>: IEEE 754-2008 decimal string format.</li>
+<li><code>currency</code>: ISO 4217 currency code.</li>
+<li><code>country-2</code>: ISO 3166-1 alpha-2 country code.</li>
+<li><code>country-3</code>: ISO 3166-1 alpha-3 country code.</li>
+<li><code>country-subdivision</code>: ISO 3166-2 country subdivision code.</li>
+<li><code>email</code>: RFC5322 email address.</li>
+<li><code>idn-email</code>: RFC6531 internationalized email address.</li>
+<li><code>hostname</code>: RFC1123 internet hostname (only ASCII segments)</li>
+<li><code>idn-hostname</code>: RFC5890 internationalized internet hostname (only <code>xn--</code>-prefixed ASCII &quot;punycode&quot; segments, or non-ASCII segments)</li>
+<li><code>ipv4</code>: RFC2673 dotted-quad IPv4 address.</li>
+<li><code>ipv6</code>: RFC2373 IPv6 address.</li>
+<li><code>url</code>: RFC3986 URI.</li>
+<li><code>url-reference</code>: RFC3986 URI Reference.</li>
+<li><code>irl</code>: RFC3987 Internationalized Resource Identifier.</li>
+<li><code>irl-reference</code>: RFC3987 Internationalized Resource Identifier Reference.</li>
+<li><code>url-template</code>: RFC6570 URI Template.</li>
+<li><code>uuid</code>: RFC4122 UUID.</li>
+<li><code>regex</code>: Regular expression. Specific patterns may be implementation-dependent.</li>
+<li><code>base64</code>: A Base64-encoded string, denoting arbitrary binary data.</li>
+</ul>
+<h4>Examples</h4>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">node</span><span style="color:#A3BE8C"> (u8)123</span></span>
+<span class="line"><span style="color:#81A1C1">node</span><span style="color:#8FBCBB"> prop</span><span style="color:#ECEFF4">=</span><span style="color:#A3BE8C">(regex)".*"</span></span>
+<span class="line"><span style="color:#81A1C1">(published)date</span><span style="color:#A3BE8C"> "1970-01-01"</span></span>
+<span class="line"><span style="color:#81A1C1">(contributor)person</span><span style="color:#8FBCBB"> name</span><span style="color:#ECEFF4">=</span><span style="color:#A3BE8C">"Foo McBar"</span></span>
+<span class="line"></span></code></pre>
+<h3>String</h3>
+<p>Strings in KDL represent textual <a href="#value">Values</a>, or unusual identifiers. A
+String is either a <a href="#quoted-string">Quoted String</a> or a
+<a href="#raw-string">Raw String</a>. Quoted Strings may include escaped characters, while
+Raw Strings always contain only the literal characters that are present.</p>
+<h3>Quoted String</h3>
+<p>A Quoted String is delimited by <code>&quot;</code> on either side of any number of literal
+string characters except unescaped <code>&quot;</code> and <code>\</code>. This includes literal
+<a href="#newline">Newline</a> characters, which means a String Value can encompass
+multiple lines without behaving like a Newline for <a href="#node">Node</a> parsing
+purposes.</p>
+<p>Strings <em>MUST</em> be represented as UTF-8 values.</p>
+<p>In addition to literal code points, a number of &quot;escapes&quot; are supported.
+&quot;Escapes&quot; are the character <code>\</code> followed by another character, and are
+interpreted as described in the following table:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Escape</th>
+<th>Code Pt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Line Feed</td>
+<td><code>\n</code></td>
+<td><code>U+000A</code></td>
+</tr>
+<tr>
+<td>Carriage Return</td>
+<td><code>\r</code></td>
+<td><code>U+000D</code></td>
+</tr>
+<tr>
+<td>Character Tabulation (Tab)</td>
+<td><code>\t</code></td>
+<td><code>U+0009</code></td>
+</tr>
+<tr>
+<td>Reverse Solidus (Backslash)</td>
+<td><code>\\</code></td>
+<td><code>U+005C</code></td>
+</tr>
+<tr>
+<td>Solidus (Forwardslash)</td>
+<td><code>\/</code></td>
+<td><code>U+002F</code></td>
+</tr>
+<tr>
+<td>Quotation Mark (Double Quote)</td>
+<td><code>\&quot;</code></td>
+<td><code>U+0022</code></td>
+</tr>
+<tr>
+<td>Backspace</td>
+<td><code>\b</code></td>
+<td><code>U+0008</code></td>
+</tr>
+<tr>
+<td>Form Feed</td>
+<td><code>\f</code></td>
+<td><code>U+000C</code></td>
+</tr>
+<tr>
+<td>Unicode Escape</td>
+<td><code>\u{(1-6 hex chars)}</code></td>
+<td>Code point described by hex characters, up to <code>10FFFF</code></td>
+</tr>
+</tbody>
+</table>
+<h3>Raw String</h3>
+<p>Raw Strings in KDL are much like <a href="#quoted-string">Quoted Strings</a>, except they
+do not support <code>\</code>-escapes. They otherwise share the same properties as far as
+literal <a href="#newline">Newline</a> characters go, and the requirement of UTF-8
+representation.</p>
+<p>Raw String literals are represented as <code>r</code>, followed by zero or more <code>#</code>
+characters, followed by <code>&quot;</code>, followed by any number of UTF-8 literals. The
+string is then closed by a <code>&quot;</code> followed by a <em>matching</em> number of <code>#</code>
+characters. This allows them to contain raw <code>&quot;</code> or <code>#</code> characters; only the
+precise terminator (resembling <code>&quot;##</code>, for example) ends the raw string. This
+means that the string sequence <code>&quot;</code> or <code>&quot;#</code> and such must not match the closing
+<code>&quot;</code> with the same or more <code>#</code> characters as the opening <code>r</code>.</p>
+<h4>Example</h4>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">just-escapes</span><span style="color:#A3BE8C"> r"</span><span style="color:#EBCB8B">\n</span><span style="color:#A3BE8C"> will be literal"</span></span>
+<span class="line"><span style="color:#81A1C1">quotes-and-escapes</span><span style="color:#A3BE8C"> r#"hello\n\r\asd"world"#</span></span>
+<span class="line"></span></code></pre>
+<h3>Number</h3>
+<p>Numbers in KDL represent numerical <a href="#value">Values</a>. There is no logical distinction in KDL
+between real numbers, integers, and floating point numbers. It's up to
+individual implementations to determine how to represent KDL numbers.</p>
+<p>There are four syntaxes for Numbers: Decimal, Hexadecimal, Octal, and Binary.</p>
+<ul>
+<li>All numbers may optionally start with one of <code>-</code> or <code>+</code>, which determine whether they'll be positive or negative.</li>
+<li>Binary numbers start with <code>0b</code> and only allow <code>0</code> and <code>1</code> as digits, which may be separated by <code>_</code>. They represent numbers in radix 2.</li>
+<li>Octal numbers start with <code>0o</code> and only allow digits between <code>0</code> and <code>7</code>, which may be separated by <code>_</code>. They represent numbers in radix 8.</li>
+<li>Hexadecimal numbers start with <code>0x</code> and allow digits between <code>0</code> and <code>9</code>, as well as letters <code>A</code> through <code>F</code>, in either lower or upper case, which may be separated by <code>_</code>. They represent numbers in radix 16.</li>
+<li>Decimal numbers are a bit more special:
+<ul>
+<li>They have no radix prefix.</li>
+<li>They use digits <code>0</code> through <code>9</code>, which may be separated by <code>_</code>.</li>
+<li>They may optionally include a decimal separator <code>.</code>, followed by more digits, which may again be separated by <code>_</code>.</li>
+<li>They may optionally be followed by <code>E</code> or <code>e</code>, an optional <code>-</code> or <code>+</code>, and more digits, to represent an exponent value.</li>
+</ul>
+</li>
+</ul>
+<h3>Boolean</h3>
+<p>A boolean <a href="#value">Value</a> is either the symbol <code>true</code> or <code>false</code>. These
+<em>SHOULD</em> be represented by implementation as boolean logical values, or some
+approximation thereof.</p>
+<h4>Example</h4>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">my-node</span><span style="color:#D8DEE9"> true</span><span style="color:#8FBCBB"> value</span><span style="color:#ECEFF4">=</span><span style="color:#D8DEE9">false</span></span>
+<span class="line"></span></code></pre>
+<h3>Null</h3>
+<p>The symbol <code>null</code> represents a null <a href="#value">Value</a>. It's up to the
+implementation to decide how to represent this, but it generally signals the
+&quot;absence&quot; of a value. It is reasonable for an implementation to ignore null
+values altogether when deserializing.</p>
+<h4>Example</h4>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">my-node</span><span style="color:#D8DEE9"> null</span><span style="color:#8FBCBB"> key</span><span style="color:#ECEFF4">=</span><span style="color:#D8DEE9">null</span></span>
+<span class="line"></span></code></pre>
+<h3>Whitespace</h3>
+<p>The following characters should be treated as non-<a href="#newline">Newline</a> <a href="https://www.unicode.org/Public/UCD/latest/ucd/PropList.txt">white
+space</a>:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Code Pt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Character Tabulation</td>
+<td><code>U+0009</code></td>
+</tr>
+<tr>
+<td>Space</td>
+<td><code>U+0020</code></td>
+</tr>
+<tr>
+<td>No-Break Space</td>
+<td><code>U+00A0</code></td>
+</tr>
+<tr>
+<td>Ogham Space Mark</td>
+<td><code>U+1680</code></td>
+</tr>
+<tr>
+<td>En Quad</td>
+<td><code>U+2000</code></td>
+</tr>
+<tr>
+<td>Em Quad</td>
+<td><code>U+2001</code></td>
+</tr>
+<tr>
+<td>En Space</td>
+<td><code>U+2002</code></td>
+</tr>
+<tr>
+<td>Em Space</td>
+<td><code>U+2003</code></td>
+</tr>
+<tr>
+<td>Three-Per-Em Space</td>
+<td><code>U+2004</code></td>
+</tr>
+<tr>
+<td>Four-Per-Em Space</td>
+<td><code>U+2005</code></td>
+</tr>
+<tr>
+<td>Six-Per-Em Space</td>
+<td><code>U+2006</code></td>
+</tr>
+<tr>
+<td>Figure Space</td>
+<td><code>U+2007</code></td>
+</tr>
+<tr>
+<td>Punctuation Space</td>
+<td><code>U+2008</code></td>
+</tr>
+<tr>
+<td>Thin Space</td>
+<td><code>U+2009</code></td>
+</tr>
+<tr>
+<td>Hair Space</td>
+<td><code>U+200A</code></td>
+</tr>
+<tr>
+<td>Narrow No-Break Space</td>
+<td><code>U+202F</code></td>
+</tr>
+<tr>
+<td>Medium Mathematical Space</td>
+<td><code>U+205F</code></td>
+</tr>
+<tr>
+<td>Ideographic Space</td>
+<td><code>U+3000</code></td>
+</tr>
+</tbody>
+</table>
+<h4>Multi-line comments</h4>
+<p>In addition to single-line comments using <code>//</code>, comments can also be started
+with <code>/*</code> and ended with <code>*/</code>. These comments can span multiple lines. They
+are allowed in all positions where <a href="#whitespace">Whitespace</a> is allowed and
+can be nested.</p>
+<h3>Newline</h3>
+<p>The following characters <a href="https://www.unicode.org/versions/Unicode16.0.0/core-spec/chapter-5/#G41643">should be treated as new
+lines</a>:</p>
+<table>
+<thead>
+<tr>
+<th>Acronym</th>
+<th>Name</th>
+<th>Code Pt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CRLF</td>
+<td>Carriage Return and Line Feed</td>
+<td><code>U+000D</code> + <code>U+000A</code></td>
+</tr>
+<tr>
+<td>CR</td>
+<td>Carriage Return</td>
+<td><code>U+000D</code></td>
+</tr>
+<tr>
+<td>LF</td>
+<td>Line Feed</td>
+<td><code>U+000A</code></td>
+</tr>
+<tr>
+<td>NEL</td>
+<td>Next Line</td>
+<td><code>U+0085</code></td>
+</tr>
+<tr>
+<td>FF</td>
+<td>Form Feed</td>
+<td><code>U+000C</code></td>
+</tr>
+<tr>
+<td>LS</td>
+<td>Line Separator</td>
+<td><code>U+2028</code></td>
+</tr>
+<tr>
+<td>PS</td>
+<td>Paragraph Separator</td>
+<td><code>U+2029</code></td>
+</tr>
+</tbody>
+</table>
+<p>Note that for the purpose of new lines, CRLF is considered <em>a single newline</em>. <code>VT</code> <code>Vertical tab</code> <code>U+000B</code> was mistakenly excluded, but the v1 spec if frozen, so it's left unchanged.</p>
+<h2>Full Grammar</h2>
+<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span>nodes := linespace* (node nodes?)? linespace*</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>node := ('/-' node-space*)? type? identifier (node-space+ node-prop-or-arg)* (node-space* node-children ws*)? node-space* node-terminator</span></span>
+<span class="line"><span>node-prop-or-arg := ('/-' node-space*)? (prop | value)</span></span>
+<span class="line"><span>node-children := ('/-' node-space*)? '{' nodes '}'</span></span>
+<span class="line"><span>node-space := ws* escline ws* | ws+</span></span>
+<span class="line"><span>node-terminator := single-line-comment | newline | ';' | eof</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>identifier := string | bare-identifier</span></span>
+<span class="line"><span>bare-identifier := ((identifier-char - digit - sign) identifier-char* | sign ((identifier-char - digit) identifier-char*)?) - keyword</span></span>
+<span class="line"><span>identifier-char := unicode - linespace - [\/(){}&#x3C;>;[]=,"]</span></span>
+<span class="line"><span>keyword := boolean | 'null'</span></span>
+<span class="line"><span>prop := identifier '=' value</span></span>
+<span class="line"><span>value := type? (string | number | keyword)</span></span>
+<span class="line"><span>type := '(' identifier ')'</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>string := raw-string | escaped-string</span></span>
+<span class="line"><span>escaped-string := '"' character* '"'</span></span>
+<span class="line"><span>character := '\' escape | [^\"]</span></span>
+<span class="line"><span>escape := ["\\/bfnrt] | 'u{' hex-digit{1, 6} '}'</span></span>
+<span class="line"><span>hex-digit := [0-9a-fA-F]</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>raw-string := 'r' raw-string-hash</span></span>
+<span class="line"><span>raw-string-hash := '#' raw-string-hash '#' | raw-string-quotes</span></span>
+<span class="line"><span>raw-string-quotes := '"' .* '"'</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>number := hex | octal | binary | decimal</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>decimal := sign? integer ('.' integer)? exponent?</span></span>
+<span class="line"><span>exponent := ('e' | 'E') sign? integer</span></span>
+<span class="line"><span>integer := digit (digit | '_')*</span></span>
+<span class="line"><span>digit := [0-9]</span></span>
+<span class="line"><span>sign := '+' | '-'</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>hex := sign? '0x' hex-digit (hex-digit | '_')*</span></span>
+<span class="line"><span>octal := sign? '0o' [0-7] [0-7_]*</span></span>
+<span class="line"><span>binary := sign? '0b' ('0' | '1') ('0' | '1' | '_')*</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>boolean := 'true' | 'false'</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>escline := '\\' ws* (single-line-comment | newline)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>linespace := newline | ws | single-line-comment</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>newline := See Table (All line-break white_space)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>ws := bom | unicode-space | multi-line-comment</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>bom := '\u{FEFF}'</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>unicode-space := See Table (All White_Space unicode characters which are not `newline`)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>single-line-comment := '//' ^newline+ (newline | eof)</span></span>
+<span class="line"><span>multi-line-comment := '/*' commented-block</span></span>
+<span class="line"><span>commented-block := '*/' | (multi-line-comment | '*' | '/' | [^*/]+) commented-block</span></span>
+<span class="line"><span></span></span></code></pre>
+</main>
+  </body>
+</html>
