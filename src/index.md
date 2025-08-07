@@ -164,6 +164,7 @@ of some examples of KDL in the wild (either v1, v2, or both):
 * [VS Code](https://marketplace.visualstudio.com/items?itemName=kdl-org.kdl&ssr=false#review-details)\*
 * [vim](https://github.com/imsnif/kdl.vim)
 * [Kate](https://github.com/larsgw/katepart-kdl)\*
+* [Zed](https://zed.dev/extensions/kdl)
 
 \* Supports KDL 2.0.0
 
