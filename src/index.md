@@ -120,7 +120,9 @@ of some examples of KDL in the wild (either v1, v2, or both):
 ## Implementations
 
 * C - [ckdl](https://github.com/tjol/ckdl)\*
-* C#/.NET - [Kadlet](https://github.com/oledfish/Kadlet) 
+* C#/.NET -
+  * [Kadlet](https://github.com/oledfish/Kadlet) (v1)
+  * [KdlSharp](https://github.com/AndreyAkinshin/KdlSharp) (v2)
 * C++ - [kdlpp](https://github.com/tjol/ckdl)\* (part of ckdl, requires C++20)
 * Common Lisp - [kdlcl](https://github.com/chee/kdlcl)
 * Crystal - [kdl-cr](https://github.com/danini-the-panini/kdl-cr)
