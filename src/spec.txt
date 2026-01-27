@@ -5,7 +5,7 @@
 KDL Community                                                 K. Marchán
                                                                Microsoft
                                                         KDL Contributors
-                                                         19 January 2025
+                                                         26 January 2026
 
 
                        The KDL Document Language
@@ -45,74 +45,53 @@ License
 
 Table of Contents
 
-   1.  Compatibility . . . . . . . . . . . . . . . . . . . . . . . .   3
-   2.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
-   3.  Components  . . . . . . . . . . . . . . . . . . . . . . . . .   3
-     3.1.  Document  . . . . . . . . . . . . . . . . . . . . . . . .   3
-
-
-
-
-Marchán & KDL Contributors    Experimental                      [Page 1]
-
-                                   KDL                      January 2025
-
-
-       3.1.1.  Example . . . . . . . . . . . . . . . . . . . . . . .   4
-     3.2.  Node  . . . . . . . . . . . . . . . . . . . . . . . . . .   4
-       3.2.1.  Example . . . . . . . . . . . . . . . . . . . . . . .   5
-     3.3.  Line Continuation . . . . . . . . . . . . . . . . . . . .   5
-       3.3.1.  Example . . . . . . . . . . . . . . . . . . . . . . .   5
-     3.4.  Property  . . . . . . . . . . . . . . . . . . . . . . . .   5
-     3.5.  Argument  . . . . . . . . . . . . . . . . . . . . . . . .   6
-       3.5.1.  Example . . . . . . . . . . . . . . . . . . . . . . .   6
-     3.6.  Children Block  . . . . . . . . . . . . . . . . . . . . .   6
-       3.6.1.  Example . . . . . . . . . . . . . . . . . . . . . . .   6
-     3.7.  Value . . . . . . . . . . . . . . . . . . . . . . . . . .   6
-     3.8.  Type Annotation . . . . . . . . . . . . . . . . . . . . .   7
-       3.8.1.  Reserved Type Annotations for Numbers Without
-               Decimals: . . . . . . . . . . . . . . . . . . . . . .   7
-       3.8.2.  Reserved Type Annotations for Numbers With
-               Decimals: . . . . . . . . . . . . . . . . . . . . . .   8
-       3.8.3.  Reserved Type Annotations for Strings:  . . . . . . .   8
-       3.8.4.  Examples  . . . . . . . . . . . . . . . . . . . . . .   9
-     3.9.  String  . . . . . . . . . . . . . . . . . . . . . . . . .   9
-     3.10. Identifier String . . . . . . . . . . . . . . . . . . . .  10
-       3.10.1.  Non-initial characters . . . . . . . . . . . . . . .  10
-       3.10.2.  Non-identifier characters  . . . . . . . . . . . . .  11
-     3.11. Quoted String . . . . . . . . . . . . . . . . . . . . . .  11
-       3.11.1.  Escapes  . . . . . . . . . . . . . . . . . . . . . .  11
-     3.12. Multi-line String . . . . . . . . . . . . . . . . . . . .  13
-       3.12.1.  Newline Normalization  . . . . . . . . . . . . . . .  14
-       3.12.2.  Examples . . . . . . . . . . . . . . . . . . . . . .  14
-       3.12.3.  Interaction with Whitespace Escapes  . . . . . . . .  16
-     3.13. Raw String  . . . . . . . . . . . . . . . . . . . . . . .  17
-       3.13.1.  Example  . . . . . . . . . . . . . . . . . . . . . .  17
-     3.14. Number  . . . . . . . . . . . . . . . . . . . . . . . . .  18
-       3.14.1.  Keyword Numbers  . . . . . . . . . . . . . . . . . .  19
-     3.15. Boolean . . . . . . . . . . . . . . . . . . . . . . . . .  19
-       3.15.1.  Example  . . . . . . . . . . . . . . . . . . . . . .  19
-     3.16. Null  . . . . . . . . . . . . . . . . . . . . . . . . . .  20
-       3.16.1.  Example  . . . . . . . . . . . . . . . . . . . . . .  20
-     3.17. Whitespace  . . . . . . . . . . . . . . . . . . . . . . .  20
-       3.17.1.  Single-line comments . . . . . . . . . . . . . . . .  21
-       3.17.2.  Multi-line comments  . . . . . . . . . . . . . . . .  22
-       3.17.3.  Slashdash comments . . . . . . . . . . . . . . . . .  22
-     3.18. Newline . . . . . . . . . . . . . . . . . . . . . . . . .  22
-     3.19. Disallowed Literal Code Points  . . . . . . . . . . . . .  23
-   4.  Full Grammar  . . . . . . . . . . . . . . . . . . . . . . . .  24
-     4.1.  Grammar language  . . . . . . . . . . . . . . . . . . . .  26
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  27
-
-
-
-
-
-
-Marchán & KDL Contributors    Experimental                      [Page 2]
-
-                                   KDL                      January 2025
-
+   1.  Compatibility
+   2.  Introduction
+   3.  Components
+     3.1.  Document
+       3.1.1.  Example
+     3.2.  Node
+       3.2.1.  Example
+     3.3.  Line Continuation
+       3.3.1.  Example
+     3.4.  Property
+     3.5.  Argument
+       3.5.1.  Example
+     3.6.  Children Block
+       3.6.1.  Example
+     3.7.  Value
+     3.8.  Type Annotation
+       3.8.1.  Reserved Type Annotations for Numbers Without Decimals:
+       3.8.2.  Reserved Type Annotations for Numbers With Decimals:
+       3.8.3.  Reserved Type Annotations for Strings:
+       3.8.4.  Examples
+     3.9.  String
+     3.10. Identifier String
+       3.10.1.  Non-initial characters
+       3.10.2.  Non-identifier characters
+     3.11. Quoted String
+       3.11.1.  Escapes
+     3.12. Multi-line String
+       3.12.1.  Newline Normalization
+       3.12.2.  Examples
+       3.12.3.  Interaction with Whitespace Escapes
+     3.13. Raw String
+       3.13.1.  Example
+     3.14. Number
+       3.14.1.  Keyword Numbers
+     3.15. Boolean
+       3.15.1.  Example
+     3.16. Null
+       3.16.1.  Example
+     3.17. Whitespace
+       3.17.1.  Single-line comments
+       3.17.2.  Multi-line comments
+       3.17.3.  Slashdash comments
+     3.18. Newline
+     3.19. Disallowed Literal Code Points
+   4.  Full Grammar
+     4.1.  Grammar language
+   Authors' Addresses
 
 1.  Compatibility
 
@@ -155,20 +134,11 @@ Marchán & KDL Contributors    Experimental                      [Page 2]
 3.1.  Document
 
    The toplevel concept of KDL is a Document.  A Document is composed of
-   zero or more Nodes (Section 3.2), separated by newlines and
-   whitespace, and eventually terminated by an EOF.
+   zero or more Nodes (Section 3.2), separated by newlines, semicolons,
+   and whitespace, and eventually terminated by an EOF.
 
-   All KDL documents should be UTF-8 encoded and conform to the
+   All KDL documents MUST be encoded in UTF-8 and conform to the
    specifications in this document.
-
-
-
-
-
-Marchán & KDL Contributors    Experimental                      [Page 3]
-
-                                   KDL                      January 2025
-
 
 3.1.1.  Example
 
@@ -217,18 +187,9 @@ Marchán & KDL Contributors    Experimental                      [Page 3]
    children, and make it act as plain whitespace, even if it spreads
    across multiple lines.
 
-
-
-
-
-Marchán & KDL Contributors    Experimental                      [Page 4]
-
-                                   KDL                      January 2025
-
-
    Finally, a node is terminated by either a Newline (Section 3.18), a
-   semicolon (;), the end of a child block (}) or the end of the file/
-   stream (an EOF).
+   semicolon (;), the end of its parent's child block (}) or the end of
+   the file/stream (an EOF).
 
 3.2.1.  Example
 
@@ -275,13 +236,6 @@ Marchán & KDL Contributors    Experimental                      [Page 4]
    Deserialized representations may iterate over properties in any order
    and still be spec-compliant.
 
-
-
-Marchán & KDL Contributors    Experimental                      [Page 5]
-
-                                   KDL                      January 2025
-
-
    Properties _MAY_ be prefixed with /- to "comment out" the entire
    token and make it act as plain whitespace, even if it spreads across
    multiple lines.
@@ -321,22 +275,12 @@ Marchán & KDL Contributors    Experimental                      [Page 5]
        child2
    }
 
-   parent { child1; child2; }
+   parent { child1; child2 }
 
 3.7.  Value
 
    A value is either: a String (Section 3.9), a Number (Section 3.14), a
    Boolean (Section 3.15), or Null (Section 3.16).
-
-
-
-
-
-
-Marchán & KDL Contributors    Experimental                      [Page 6]
-
-                                   KDL                      January 2025
-
 
    Values _MUST_ be either Arguments (Section 3.5) or values of
    Properties (Section 3.4).  Only String (Section 3.9) values may be
@@ -387,13 +331,6 @@ Marchán & KDL Contributors    Experimental                      [Page 6]
 
    *  u64
 
-
-
-Marchán & KDL Contributors    Experimental                      [Page 7]
-
-                                   KDL                      January 2025
-
-
    *  u128
 
    Platform-dependent integer types, both signed and unsigned:
@@ -443,13 +380,6 @@ Marchán & KDL Contributors    Experimental                      [Page 7]
 
    *  hostname: RFC1123 internet hostname (only ASCII segments)
 
-
-
-Marchán & KDL Contributors    Experimental                      [Page 8]
-
-                                   KDL                      January 2025
-
-
    *  idn-hostname: RFC5890 internationalized internet hostname (only xn
       ---prefixed ASCII "punycode" segments, or non-ASCII segments)
 
@@ -475,6 +405,9 @@ Marchán & KDL Contributors    Experimental                      [Page 8]
 
    *  base64: A Base64-encoded string, denoting arbitrary binary data.
 
+   *  base85: An Ascii85 (https://en.wikipedia.org/wiki/Ascii85)-encoded
+      string, denoting arbitrary binary data.
+
 3.8.4.  Examples
 
    node (u8)123
@@ -498,13 +431,6 @@ Marchán & KDL Contributors    Experimental                      [Page 8]
 
    *  Multi-Line Strings let you write strings across multiple lines and
       with indentation that's not part of the string value.
-
-
-
-Marchán & KDL Contributors    Experimental                      [Page 9]
-
-                                   KDL                      January 2025
-
 
    *  Raw Strings don't allow any escapes, allowing you to not worry
       about the string's content containing anything that might look
@@ -551,16 +477,6 @@ Marchán & KDL Contributors    Experimental                      [Page 9]
 
    Additionally, the following initial characters impose limitations on
    subsequent characters:
-
-
-
-
-
-
-Marchán & KDL Contributors    Experimental                     [Page 10]
-
-                                   KDL                      January 2025
-
 
    *  the + and - characters can only be used as an initial character if
       the second character is _not_ a digit.  If the second character is
@@ -610,14 +526,6 @@ Marchán & KDL Contributors    Experimental                     [Page 10]
    by another character, and are interpreted as described in the
    following table:
 
-
-
-
-Marchán & KDL Contributors    Experimental                     [Page 11]
-
-                                   KDL                      January 2025
-
-
    +==============+=========+=========================================+
    | Name         | Escape  | Code Pt                                 |
    +==============+=========+=========================================+
@@ -665,14 +573,6 @@ Marchán & KDL Contributors    Experimental                     [Page 11]
    "Hello World"
 
    and
-
-
-
-
-Marchán & KDL Contributors    Experimental                     [Page 12]
-
-                                   KDL                      January 2025
-
 
    "Hello \    World"
 
@@ -723,18 +623,18 @@ Marchán & KDL Contributors    Experimental                     [Page 12]
    on all intermediate lines.  The first and last Newline can be the
    same character (that is, empty multi-line strings are legal).
 
-
-
-Marchán & KDL Contributors    Experimental                     [Page 13]
-
-                                   KDL                      January 2025
-
-
    In other words, the final line specifies the whitespace prefix that
    will be removed from all other lines.
 
+   Whitespace-only lines (that is, lines containing only literal
+   whitespace characters, not including whitespace escapes like \t)
+   always represent empty lines in the string value, regardless of what
+   whitespace they contain (if any).  They do not have to start with the
+   same whitespace prefix that other lines do; all characters on the
+   line are ignored.
+
    Multi-line Strings that do not immediately start with a Newline and
-   whose final """ is not preceeded by optional whitespace and a Newline
+   whose final """ is not preceded by optional whitespace and a Newline
    are illegal.  This also means that """ may not be used for a single-
    line String (e.g. """foo""").
 
@@ -777,14 +677,6 @@ Marchán & KDL Contributors    Experimental                     [Page 13]
            bar
 
    which is equivalent to
-
-
-
-
-Marchán & KDL Contributors    Experimental                     [Page 14]
-
-                                   KDL                      January 2025
-
 
    "    foo\nThis is the base indentation\n        bar"
 
@@ -832,16 +724,6 @@ Marchán & KDL Contributors    Experimental                     [Page 14]
 
    "Indented a bit.\n\nA second indented paragraph."
 
-
-
-
-
-
-Marchán & KDL Contributors    Experimental                     [Page 15]
-
-                                   KDL                      January 2025
-
-
 3.12.2.4.  Syntax errors
 
    The following yield *syntax errors*:
@@ -888,16 +770,6 @@ Marchán & KDL Contributors    Experimental                     [Page 15]
 
    while the following example is allowed
 
-
-
-
-
-
-Marchán & KDL Contributors    Experimental                     [Page 16]
-
-                                   KDL                      January 2025
-
-
      """
      foo \
    bar
@@ -941,18 +813,6 @@ Marchán & KDL Contributors    Experimental                     [Page 16]
    quotes-and-escapes ##"hello\n\r\asd"#world"##
 
    The string contains the literal characters hello\n\r\asd"#world
-
-
-
-
-
-
-
-
-Marchán & KDL Contributors    Experimental                     [Page 17]
-
-                                   KDL                      January 2025
-
 
    raw-multi-line #"""
        Here's a """
@@ -1002,14 +862,6 @@ Marchán & KDL Contributors    Experimental                     [Page 17]
 
       -  They have no radix prefix.
 
-
-
-
-Marchán & KDL Contributors    Experimental                     [Page 18]
-
-                                   KDL                      January 2025
-
-
       -  They use digits 0 through 9, which may be separated by _.
 
       -  They may optionally include a decimal separator ., followed by
@@ -1017,6 +869,14 @@ Marchán & KDL Contributors    Experimental                     [Page 18]
 
       -  They may optionally be followed by E or e, an optional - or +,
          and more digits, to represent an exponent value.
+
+   In all cases where the above says that digits "may be separated by
+   _", this means that between any two digits, or after the digits, any
+   number of consecutive _ characters can appear.  Underscores are not
+   allowed _before_ the digits.  That is, 1___2 and 12____ are valid
+   (and both equivalent to just 12), but _12 is _not_ a valid number (it
+   will instead parse as an identifier string), nor is 0x_1a (it will
+   simply be invalid).
 
    Note that, similar to JSON and some other languages, numbers without
    an integer digit (such as .1) are illegal.  They must be written with
@@ -1027,7 +887,7 @@ Marchán & KDL Contributors    Experimental                     [Page 18]
 3.14.1.  Keyword Numbers
 
    There are three special "keyword" numbers included in KDL to
-   accomodate the widespread use of IEEE 754
+   accommodate the widespread use of IEEE 754
    (https://en.wikipedia.org/wiki/IEEE_754) floats:
 
    *  #inf - floating point positive infinity.
@@ -1055,17 +915,6 @@ Marchán & KDL Contributors    Experimental                     [Page 18]
 
    my-node #true value=#false
 
-
-
-
-
-
-
-Marchán & KDL Contributors    Experimental                     [Page 19]
-
-                                   KDL                      January 2025
-
-
 3.16.  Null
 
    The symbol #null represents a null Value (Section 3.7).  It's up to
@@ -1081,46 +930,6 @@ Marchán & KDL Contributors    Experimental                     [Page 19]
    The following characters should be treated as non-Newline
    (Section 3.18) white space
    (https://www.unicode.org/Public/UCD/latest/ucd/PropList.txt):
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Marchán & KDL Contributors    Experimental                     [Page 20]
-
-                                   KDL                      January 2025
-
 
                   +===========================+=========+
                   | Name                      | Code Pt |
@@ -1169,15 +978,6 @@ Marchán & KDL Contributors    Experimental                     [Page 20]
    Any text after //, until the next literal Newline (Section 3.18) is
    "commented out", and is considered to be Whitespace (Section 3.17).
 
-
-
-
-
-Marchán & KDL Contributors    Experimental                     [Page 21]
-
-                                   KDL                      January 2025
-
-
 3.17.2.  Multi-line comments
 
    In addition to single-line comments using //, comments can also be
@@ -1219,20 +1019,6 @@ Marchán & KDL Contributors    Experimental                     [Page 21]
    The following character sequences should be treated as new lines
    (https://www.unicode.org/versions/Unicode16.0.0/core-spec/chapter-
    5/#G41643):
-
-
-
-
-
-
-
-
-
-
-Marchán & KDL Contributors    Experimental                     [Page 22]
-
-                                   KDL                      January 2025
-
 
        +=========+===============================+=================+
        | Acronym | Name                          | Code Pt         |
@@ -1282,14 +1068,6 @@ Marchán & KDL Contributors    Experimental                     [Page 22]
    *  U+FEFF, aka Zero-width Non-breaking Space (ZWNBSP)/Byte Order Mark
       (BOM), except as the first code point in a document.
 
-
-
-
-Marchán & KDL Contributors    Experimental                     [Page 23]
-
-                                   KDL                      January 2025
-
-
 4.  Full Grammar
 
    This is the full official grammar for KDL and should be considered
@@ -1302,11 +1080,11 @@ Marchán & KDL Contributors    Experimental                     [Page 23]
    nodes := (line-space* node)* line-space*
 
    base-node := slashdash? type? node-space* string
-       (node-space+ slashdash? node-prop-or-arg)*
+       (node-space* (node-space | slashdash) node-prop-or-arg)*
        // slashdashed node-children must always be after props and args.
-       (node-space+ slashdash node-children)*
-       (node-space+ node-children)?
-       (node-space+ slashdash node-children)*
+       (node-space* slashdash node-children)*
+       (node-space* node-children)?
+       (node-space* slashdash node-children)*
        node-space*
    node := base-node node-terminator
    final-node := base-node node-terminator?
@@ -1323,10 +1101,11 @@ Marchán & KDL Contributors    Experimental                     [Page 23]
    // Strings
    string := identifier-string | quoted-string | raw-string ¶
 
-   identifier-string := unambiguous-ident | signed-ident | dotted-ident
+   identifier-string :=
+       (unambiguous-ident | signed-ident | dotted-ident)
+       - disallowed-keyword-identifiers
    unambiguous-ident :=
-       ((identifier-char - digit - sign - '.') identifier-char*)
-       - disallowed-keyword-strings
+       (identifier-char - digit - sign - '.') identifier-char*
    signed-ident :=
        sign ((identifier-char - digit - '.') identifier-char*)?
    dotted-ident :=
@@ -1338,14 +1117,6 @@ Marchán & KDL Contributors    Experimental                     [Page 23]
        'true' | 'false' | 'null' | 'inf' | '-inf' | 'nan'
 
    quoted-string :=
-
-
-
-Marchán & KDL Contributors    Experimental                     [Page 24]
-
-                                   KDL                      January 2025
-
-
        '"' single-line-string-body '"' |
        '"""' newline
        (multi-line-string-body newline)?
@@ -1359,10 +1130,13 @@ Marchán & KDL Contributors    Experimental                     [Page 24]
        [^\\"] - disallowed-literal-code-points
    ws-escape := '\\' (unicode-space | newline)+
    hex-digit := [0-9a-fA-F]
-   hex-unicode := hex-digit{1, 6} - surrogates
-   surrogates := [dD][8-9a-fA-F]hex-digit{2}
-   // U+D800-DFFF: D  8         00
-   //              D  F         FF
+   hex-unicode := hex-digit{1, 6} - surrogate - above-max-scalar
+   surrogate := [0]{0, 2} [dD] [8-9a-fA-F] hex-digit{2}
+   //  U+D800-DFFF:         D   8          00
+   //                       D   F          FF
+   above-max-scalar = [2-9a-fA-F] hex-digit{5} |
+       [1] [1-9a-fA-F] hex-digit{4}
+
 
    raw-string := '#' raw-string-quotes '#' | '#' raw-string '#'
    raw-string-quotes :=
@@ -1393,14 +1167,6 @@ Marchán & KDL Contributors    Experimental                     [Page 24]
    hex := sign? '0x' hex-digit (hex-digit | '_')*
    octal := sign? '0o' [0-7] [0-7_]*
    binary := sign? '0b' ('0' | '1') ('0' | '1' | '_')*
-
-
-
-
-Marchán & KDL Contributors    Experimental                     [Page 25]
-
-                                   KDL                      January 2025
-
 
    // Keywords and booleans.
    keyword := boolean | '#null'
@@ -1446,17 +1212,6 @@ Marchán & KDL Contributors    Experimental                     [Page 25]
       literal string is used for escaping other single-quotes, for
       initiating unicode characters using hex values (\u{FEFF}), and for
       escaping \ itself (\\).
-
-
-
-
-
-
-
-Marchán & KDL Contributors    Experimental                     [Page 26]
-
-                                   KDL                      January 2025
-
 
    *  * is used for "zero or more", + is used for "one or more", and ?
       is used for "zero or one".  Per standard regex semantics, * and +
@@ -1506,7 +1261,3 @@ Authors' Addresses
 
 
    The KDL Contributors
-
-
-
-Marchán & KDL Contributors    Experimental                     [Page 27]
