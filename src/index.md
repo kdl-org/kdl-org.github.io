@@ -130,8 +130,8 @@ of some examples of KDL in the wild (either v1, v2, or both):
   * [gokdl](https://github.com/lunjon/gokdl)
   * [kdl-go](https://github.com/sblinch/kdl-go)
 * Haskell -
-  * [Hustle](https://github.com/fuzzypixelz/Hustle) (v1 only)
-  * [kdl-hs](https://github.com/brandonchinn178/kdl-hs) (Format/comment-preserving parser)
+  * [Hustle](https://github.com/fuzzypixelz/Hustle)
+  * [kdl-hs](https://github.com/brandonchinn178/kdl-hs)\* (Format/comment-preserving parser)
 * Java - [kdl4j](https://github.com/kdl-org/kdl4j)\*
 * JavaScript -
   * [@bgotink/kdl](https://github.com/bgotink/kdl)\* (Format/comment-preserving parser) 
