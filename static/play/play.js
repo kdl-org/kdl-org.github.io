@@ -110,38 +110,18 @@ addEventListener("DOMContentLoaded", (event) => {
       document.nodes.forEach(node => {
         output.append(buildNodeTree(node))
       })
-
     } catch (error) {
       output.classList.add('error')
       if (error instanceof KDL.InvalidKdlError) {
-        markers.push({
-          message: error.message,
-          severity: monaco.MarkerSeverity.Error,
-          startLineNumber: error.start?.line,
-          startColumn: error.start?.column,
-          endLineNumber: error.end?.line,
-          endColumn: error.end?.column,
-        })
-      } else if (typeof AggregateError === 'function' && error instanceof AggregateError) {
-        for (const suberror of error.errors) {
-          if (suberror instanceof KDL.InvalidKdlError) {
-            markers.push({
-              message: suberror.message,
-              severity: monaco.MarkerSeverity.Error,
-              startLineNumber: suberror.start?.line,
-              startColumn: suberror.start?.column,
-              endLineNumber: suberror.end?.line,
-              endColumn: suberror.end?.column,
-            })
-          } else {
-            console.error(suberror);
-            markers.push({
-              message: "Failed to parse KDL",
-              severity: monaco.MarkerSeverity.Error,
-              startLineNumber: 1,
-              startColumn: 1,
-            })
-          }
+        for (const detail of error.flat()) {
+          markers.push({
+            message: detail.message,
+            severity: monaco.MarkerSeverity.Error,
+            startLineNumber: detail.start?.line,
+            startColumn: detail.start?.column,
+            endLineNumber: detail.end?.line,
+            endColumn: detail.end?.column,
+          })
         }
       } else {
         console.error(error)
