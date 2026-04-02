@@ -172,6 +172,7 @@ of some examples of KDL in the wild (either v1, v2, or both):
 * [vim](https://github.com/imsnif/kdl.vim)
 * [Kate](https://github.com/larsgw/katepart-kdl)\*
 * [Zed](https://zed.dev/extensions/kdl)
+* [Nova](https://extensions.panic.com/extensions/net.marquiskurt/net.marquiskurt.kdl-lang/)
 
 \* Supports KDL 2.0.0
 
