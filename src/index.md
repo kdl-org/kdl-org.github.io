@@ -418,7 +418,7 @@ data models of the other two languages:
 
 </section>
 
-<section class="kdl-section" id="compatibility-with-json-and-xml">
+<section class="kdl-section" id="faq">
 
 ## FAQ
 
