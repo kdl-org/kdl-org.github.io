@@ -83,6 +83,7 @@ h1 img {
   border-radius: 8px;
   background-color: #2e3440;
   color: #D8DEE9;
+  white-space-collapse: preserve;
 }
 
 #output.error {
