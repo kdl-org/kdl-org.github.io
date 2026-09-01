@@ -121,43 +121,47 @@ of some examples of KDL in the wild (either v1, v2, or both):
 
 ## Implementations
 
-* C - [ckdl](https://github.com/tjol/ckdl)\*
+* C - [ckdl](https://github.com/tjol/ckdl)
 * C#/.NET -
-  * [Kadlet](https://github.com/oledfish/Kadlet) (v1)
-  * [KdlSharp](https://github.com/AndreyAkinshin/KdlSharp) (v2)
-* C++ - [kdlpp](https://github.com/tjol/ckdl)\* (part of ckdl, requires C++20)
-* Common Lisp - [kdlcl](https://github.com/chee/kdlcl)
-* Crystal - [kdl-cr](https://github.com/danini-the-panini/kdl-cr)
-* Dart - [kdl-dart](https://github.com/danini-the-panini/kdl-dart)\*
-* Elixir - [kuddle](https://github.com/IceDragon200/kuddle)\*
+  * [Kadlet](https://github.com/oledfish/Kadlet)\*
+  * [KdlSharp](https://github.com/AndreyAkinshin/KdlSharp) (.NET Std: 2.1+, .NET 6+, .NET FW 4.7.2+, Mono, Xamarin)
+* C++ - [kdlpp](https://github.com/tjol/ckdl) (part of ckdl, requires C++20)
+* Common Lisp - [kdlcl](https://github.com/chee/kdlcl)\*
+* Crystal - [kdl-cr](https://github.com/danini-the-panini/kdl-cr)\*
+* Dart - [kdl-dart](https://github.com/danini-the-panini/kdl-dart)
+* Elixir - [kuddle](https://github.com/IceDragon200/kuddle)
 * Go -
-  * [gokdl](https://github.com/lunjon/gokdl)
-  * [kdl-go](https://github.com/sblinch/kdl-go)
+  * [gokdl](https://github.com/lunjon/gokdl)\*
+  * [kdl-go](https://github.com/sblinch/kdl-go)\*
+  * [gokdl2](https://github.com/njreid/gokdl2) (Friendly errors & arena allocator)
+  * [kdly](https://codeberg.org/shimeoki/kdly)\*\* (Format/comment-preserving parser)
 * Haskell -
-  * [Hustle](https://github.com/fuzzypixelz/Hustle)
-  * [kdl-hs](https://github.com/brandonchinn178/kdl-hs)\* (Format/comment-preserving parser)
-* Java - [kdl4j](https://github.com/kdl-org/kdl4j)\*
+  * [Hustle](https://github.com/fuzzypixelz/Hustle)\*
+  * [kdl-hs](https://github.com/brandonchinn178/kdl-hs) (Format/comment-preserving parser)
+* Java - [kdl4j](https://github.com/kdl-org/kdl4j)
 * JavaScript -
-  * [@bgotink/kdl](https://github.com/bgotink/kdl)\* (Format/comment-preserving parser) 
-  * [@virtualstate/kdl](https://github.com/virtualstate/kdl) (query only, JSX based)
-  * [kdljs](https://github.com/kdl-org/kdljs)\*
-* Lua - [kdlua](https://github.com/danini-the-panini/kdlua)
-* Nim - [kdl-nim](https://github.com/Patitotective/kdl-nim)
+  * [@bgotink/kdl](https://github.com/bgotink/kdl) (Format/comment-preserving parser)
+  * [@virtualstate/kdl](https://github.com/virtualstate/kdl)\* (query only, JSX based)
+  * [kdljs](https://github.com/kdl-org/kdljs)
+* Lua - [kdlua](https://github.com/danini-the-panini/kdlua)\*
+* Nim - [kdl-nim](https://github.com/Patitotective/kdl-nim)\*
 * OCaml - [ocaml-kdl](https://github.com/Bannerets/ocaml-kdl)
-* PHP - [kdl-php](https://github.com/kdl-org/kdl-php)
+* PHP - [kdl-php](https://github.com/kdl-org/kdl-php)\*
 * Python -
-  * [ckdl](https://github.com/tjol/ckdl)\*
-  * [cuddle](https://github.com/djmattyg007/python-cuddle)
-  * [kdl-py](https://github.com/tabatkins/kdlpy)\*
-* Ruby - [kdl-rb](https://github.com/danini-the-panini/kdl-rb)\*
+  * [ckdl](https://github.com/tjol/ckdl)
+  * [cuddle](https://github.com/djmattyg007/python-cuddle)\*
+  * [kdl-py](https://github.com/tabatkins/kdlpy)
+* Ruby - [kdl-rb](https://github.com/danini-the-panini/kdl-rb)
 * Rust -
-  * [kdl-rs](https://github.com/kdl-org/kdl-rs) (Format/comment-preserving parser)\*
-  * [knus](https://crates.io/crates/knus/) (Serde-_style_ derive macros (not actual Serde))
-* Swift - [kdl-swift](https://github.com/danini-the-panini/kdl-swift)
-* XSLT - [xml2kdl](https://github.com/Devasta/XML2KDL)
-* Zig - [zig-kdl](https://codeberg.org/desttinghim/zig-kdl)
+  * [kdl-rs](https://github.com/kdl-org/kdl-rs) (Format/comment-preserving parser)
+  * [knus](https://crates.io/crates/knus/)\* (Serde-_style_ derive macros (not actual Serde))
+* Swift - [kdl-swift](https://github.com/danini-the-panini/kdl-swift)\*
+* XSLT - [xml2kdl](https://github.com/Devasta/XML2KDL)\*
+* Zig - [zig-kdl](https://codeberg.org/desttinghim/zig-kdl) (Format/comment-preserving parser)
 
-\* Supports both KDL v1 and v2
+\* Supports only KDL v1
+
+\*\* Supports only KDL v2
 
 </section>
 
