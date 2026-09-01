@@ -169,16 +169,26 @@ of some examples of KDL in the wild (either v1, v2, or both):
 
 ## Editor Support
 
-* [Intellij IDEA](https://plugins.jetbrains.com/plugin/20136-kdl-document-language)
-* [Sublime Text](https://packagecontrol.io/packages/KDL)\*
-* [TreeSitter](https://github.com/tree-sitter-grammars/tree-sitter-kdl) (neovim, among others)
-* [VS Code](https://marketplace.visualstudio.com/items?itemName=kdl-org.kdl&ssr=false#review-details)\*
-* [vim](https://github.com/imsnif/kdl.vim)
-* [Kate](https://github.com/larsgw/katepart-kdl)\*
-* [Zed](https://zed.dev/extensions/kdl)
-* [Nova](https://extensions.panic.com/extensions/net.marquiskurt/net.marquiskurt.kdl-lang/)
+* [Intellij IDEA](https://plugins.jetbrains.com/plugin/20136-kdl-document-language)\*
+* [Sublime Text](https://packagecontrol.io/packages/KDL)
+* [TreeSitter](https://github.com/tree-sitter-grammars/tree-sitter-kdl)\* (neovim, among others)
+* [VS Code](https://marketplace.visualstudio.com/items?itemName=kdl-org.kdl&ssr=false#review-details)
+* [vim](https://github.com/imsnif/kdl.vim)\*
+* [Kate](https://github.com/larsgw/katepart-kdl)
+* [Zed](https://zed.dev/extensions/kdl)\*
+* [Nova](https://extensions.panic.com/extensions/net.marquiskurt/net.marquiskurt.kdl-lang/)\*
 
-\* Supports KDL 2.0.0
+\* Supports only KDL v1
+
+## Tools
+
+* Formatters -
+  * [kdlfmt](https://github.com/hougesen/kdlfmt)
+  * [kdl-fmt](https://github.com/dj95/kdl-fmt)
+  * [kdlf](https://codeberg.org/shimeoki/kdlf)\*\*
+* Language Server - [kdl-lsp](https://github.com/kdl-org/kdl-rs) (Included in kdl-rs)
+
+\*\* Supports only KDL v2
 
 </section>
 
