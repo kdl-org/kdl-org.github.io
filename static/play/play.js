@@ -100,10 +100,14 @@ addEventListener("DOMContentLoaded", (event) => {
   const model = editor.getModel()
   const output = document.getElementById('output')
 
+  const flags = {
+    experimentalSuffixedNumbers: new URL(location.href).searchParams.has("withNumberSuffix"),
+  }
+
   function parse() {
     const markers = []
     try {
-      let document = KDL.parse(model.getValue())
+      let document = KDL.parse(model.getValue(), {flags})
       output.classList.remove('error')
 
       output.innerHTML = ''
