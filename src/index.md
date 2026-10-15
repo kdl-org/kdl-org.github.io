@@ -147,6 +147,7 @@ of some examples of KDL in the wild (either v1, v2, or both):
 * Nim - [kdl-nim](https://github.com/Patitotective/kdl-nim)\*
 * OCaml - [ocaml-kdl](https://github.com/Bannerets/ocaml-kdl)
 * PHP - [kdl-php](https://github.com/kdl-org/kdl-php)\*
+* Perl - [Text::KDL::XS](https://metacpan.org/pod/Text::KDL::XS) (on top of ckdl)
 * Python -
   * [ckdl](https://github.com/tjol/ckdl)
   * [cuddle](https://github.com/djmattyg007/python-cuddle)\*
